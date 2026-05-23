@@ -6,7 +6,14 @@ import {
   ShieldCheck,
 } from 'lucide-react'
 import { CreaPrototipoButton } from '@/components/common/CreaPrototipoButton'
+import { LandingProstheticArm } from '@/components/landing/LandingProstheticArm'
 import styles from '../HomePage.module.css'
+
+const PROSTHETIC_META = [
+  { k: 'Tipo', v: 'Transradial' },
+  { k: 'Uso', v: 'Deportivo' },
+  { k: 'Material', v: 'Fibra de C.' },
+]
 
 const AVATAR_COLORS = ['#a8d5ba', '#7ed6a3', '#f4d35e', '#86c79b']
 const CHART_HEIGHTS = [40, 55, 48, 70, 62, 80, 88]
@@ -57,40 +64,62 @@ export function HomeHero() {
         </div>
 
         <div className={styles.heroAside}>
-          <div className={styles.heroCard}>
-            <div className={styles.heroCardHead}>
-              <div>
-                <p className={styles.cardLabel}>Próxima sesión</p>
-                <p className={styles.cardTitle}>Dra. Lucía Méndez</p>
-                <p className={styles.cardSubtitle}>Psicología de rehabilitación</p>
+          <div className={styles.heroCardsRow}>
+            <div className={styles.heroCard}>
+              <div className={styles.heroCardHead}>
+                <div>
+                  <p className={styles.cardLabel}>Próxima sesión</p>
+                  <p className={styles.cardTitle}>Dra. Lucía Méndez</p>
+                  <p className={styles.cardSubtitle}>Psicología de rehabilitación</p>
+                </div>
+                <span className={styles.badge}>Hoy · 16:30</span>
               </div>
-              <span className={styles.badge}>Hoy · 16:30</span>
+
+              <div className={styles.chartBox}>
+                <p className={styles.cardLabel}>Estado emocional · semana</p>
+                <div className={styles.chartBars}>
+                  {CHART_HEIGHTS.map((h, i) => (
+                    <div key={i} className={styles.chartBar} style={{ height: `${h}%` }} />
+                  ))}
+                </div>
+                <div className={styles.chartDays}>
+                  {CHART_DAYS.map((d, i) => (
+                    <span key={`${d}-${i}`}>{d}</span>
+                  ))}
+                </div>
+              </div>
+
+              <div className={styles.statGrid}>
+                <div className={styles.statCardAccent}>
+                  <Activity className={styles.iconMd} aria-hidden />
+                  <p className={styles.statValue}>12</p>
+                  <p className={styles.statLabel}>sesiones completadas</p>
+                </div>
+                <div className={styles.statCardPrimary}>
+                  <HeartPulse className={styles.iconMd} aria-hidden />
+                  <p className={styles.statValue}>+38%</p>
+                  <p className={styles.statLabel}>bienestar reportado</p>
+                </div>
+              </div>
             </div>
 
-            <div className={styles.chartBox}>
-              <p className={styles.cardLabel}>Estado emocional · semana</p>
-              <div className={styles.chartBars}>
-                {CHART_HEIGHTS.map((h, i) => (
-                  <div key={i} className={styles.chartBar} style={{ height: `${h}%` }} />
-                ))}
+            <div className={`${styles.mockCard} ${styles.heroProstheticCard}`}>
+              <div className={styles.mockHead}>
+                <p className={styles.cardTitle}>Tu prótesis</p>
+                <span className={styles.badge}>IA activa</span>
               </div>
-              <div className={styles.chartDays}>
-                {CHART_DAYS.map((d, i) => (
-                  <span key={`${d}-${i}`}>{d}</span>
-                ))}
-              </div>
-            </div>
 
-            <div className={styles.statGrid}>
-              <div className={styles.statCardAccent}>
-                <Activity className={styles.iconMd} aria-hidden />
-                <p className={styles.statValue}>12</p>
-                <p className={styles.statLabel}>sesiones completadas</p>
+              <div className={styles.mockMetaGrid}>
+                {PROSTHETIC_META.map((c) => (
+                  <div key={c.k} className={styles.mockMetaCell}>
+                    <p className={styles.mockMetaKey}>{c.k}</p>
+                    <p className={styles.mockMetaVal}>{c.v}</p>
+                  </div>
+                ))}
               </div>
-              <div className={styles.statCardPrimary}>
-                <HeartPulse className={styles.iconMd} aria-hidden />
-                <p className={styles.statValue}>+38%</p>
-                <p className={styles.statLabel}>bienestar reportado</p>
+
+              <div className={styles.mockPreview}>
+                <LandingProstheticArm hideHeader />
               </div>
             </div>
           </div>

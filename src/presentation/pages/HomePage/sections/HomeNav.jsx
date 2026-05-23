@@ -1,62 +1,150 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { LayoutDashboard } from 'lucide-react'
+import {
+  LayoutDashboard,
+  Menu,
+  X,
+} from 'lucide-react'
 
-import { CreaPrototipoButton } from '@/components/common/CreaPrototipoButton'
-
-
+import { RoleAccessButtons } from '@/components/common/RoleAccessButtons'
 import { useAuth } from '@/hooks/useAuth'
 import { getDashboardPathForRole } from '@/utils/authPaths'
 
 import styles from '../HomePage.module.css'
 
+const NAV_ITEMS = [
+  {
+    href: '#servicios',
+    label: 'Servicios',
+  },
+  {
+    href: '#protesis',
+    label: 'Asistente de prótesis',
+  },
+  {
+    href: '#proceso',
+    label: 'Proceso',
+  },
+  {
+    href: '#prototipo',
+    label: 'Plataforma',
+  },
+]
+
 export function HomeNav() {
-  const { isAuthenticated, role } = useAuth()
+  const { isAuthenticated, role } =
+    useAuth()
+
+  const [menuOpen, setMenuOpen] =
+    useState(false)
+
+  const closeMenu = () =>
+    setMenuOpen(false)
 
   return (
     <header className={styles.nav}>
       <div className={styles.navInner}>
-
         {/* LOGO */}
-        <Link to="/" className={styles.brand}>
-          <span className={styles.brandMark}>R</span>
-          <span className={styles.brandName}>Reandar</span>
+        <Link
+          to="/"
+          className={styles.brand}
+          onClick={closeMenu}
+        >
+          <span className={styles.brandMark}>
+            R
+          </span>
+
+          <span className={styles.brandName}>
+            Reandar
+          </span>
         </Link>
 
         {/* LINKS */}
-        <nav className={styles.navLinks}>
-          <a href="#servicios" className={styles.navLink}>
-            Servicios
-          </a>
+        <nav
+          id="landing-nav"
+          className={`${styles.navLinks} ${menuOpen
+            ? styles.navLinksOpen
+            : ''
+            }`}
+          aria-label="Principal"
+        >
+          {NAV_ITEMS.map(
+            ({ href, label }) => (
+              <a
+                key={href}
+                href={href}
+                className={styles.navLink}
+                onClick={closeMenu}
+              >
+                {label}
+              </a>
+            )
+          )}
 
-          <a href="#protesis" className={styles.navLink}>
-            Asistente de prótesis
-          </a>
 
-          <a href="#proceso" className={styles.navLink}>
-            Proceso
-          </a>
-
-          <a href="#prototipo" className={styles.navLink}>
-            Plataforma
-          </a>
         </nav>
 
         {/* ACTIONS */}
         <div className={styles.navActions}>
           {isAuthenticated && role ? (
             <Link
-              to={getDashboardPathForRole(role)}
-              className={styles.navDashboardLink}
+              to={getDashboardPathForRole(
+                role
+              )}
+              className={
+                styles.navDashboardLink
+              }
+              onClick={closeMenu}
             >
-              <LayoutDashboard size={16} aria-hidden />
+              <LayoutDashboard
+                size={16}
+                aria-hidden
+              />
+
               <span>Mi panel</span>
             </Link>
           ) : (
-            <>
-              <CreaPrototipoButton variant="nav" />
-
-            </>
+            <div
+              className={
+                styles.inlineButtons
+              }
+            >
+              <RoleAccessButtons
+                layout="row"
+                className={
+                  styles.navRoleBtns
+                }
+              />
+            </div>
           )}
+
+          {/* TOGGLE */}
+          <button
+            type="button"
+            className={styles.navToggle}
+            aria-expanded={menuOpen}
+            aria-controls="landing-nav"
+            aria-label={
+              menuOpen
+                ? 'Cerrar menú'
+                : 'Abrir menú'
+            }
+            onClick={() =>
+              setMenuOpen((v) => !v)
+            }
+          >
+            {menuOpen ? (
+              <X
+                size={22}
+                aria-hidden
+              />
+            ) : (
+              <Menu
+                size={22}
+                aria-hidden
+              />
+            )}
+          </button>
         </div>
       </div>
     </header>

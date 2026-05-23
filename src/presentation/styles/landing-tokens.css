@@ -66,3 +66,16 @@
 .landingRoot ul {
   margin: 0;
 }
+
+.landingRoot img,
+.landingRoot video,
+.landingRoot canvas {
+  max-width: 100%;
+  height: auto;
+}
+
+@media (max-width: 767px) {
+  .landingRoot {
+    overflow-x: hidden;
+  }
+}

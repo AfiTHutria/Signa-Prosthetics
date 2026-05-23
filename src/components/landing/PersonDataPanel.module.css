@@ -191,3 +191,46 @@
   opacity: 0.92;
   transform: translateY(-1px);
 }
+
+@media (max-width: 639px) {
+  .overlay {
+    padding: 0.75rem;
+    align-items: flex-end;
+  }
+
+  .panel {
+    margin-block: 0;
+    max-height: 92dvh;
+    border-radius: 1.25rem 1.25rem 0 0;
+  }
+
+  .header {
+    grid-template-columns: auto 1fr auto;
+    gap: 0.75rem;
+    padding: 1rem 1rem 0.75rem;
+  }
+
+  .title {
+    font-size: 1.25rem;
+  }
+
+  .body {
+    max-height: min(50dvh, 420px);
+    padding: 1rem;
+  }
+
+  .footer {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 1rem;
+  }
+
+  .footerNote {
+    max-width: none;
+  }
+
+  .footerBtn {
+    width: 100%;
+    text-align: center;
+  }
+}

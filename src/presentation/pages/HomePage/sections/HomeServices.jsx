@@ -34,10 +34,7 @@ export function HomeServices() {
           <p className={styles.sectionKicker}>Servicios</p>
           <h2 className={styles.sectionTitle}>Cuidado integral, hecho a tu medida.</h2>
         </div>
-        <p className={styles.sectionDesc}>
-          Combinamos atención psicológica humana con herramientas digitales que entienden el proceso
-          único de cada persona amputada.
-        </p>
+
       </div>
 
       <div className={styles.servicesGrid}>
@@ -54,12 +51,6 @@ export function HomeServices() {
               <span className={isDark ? styles.serviceTagDark : styles.serviceTag}>{tag}</span>
               <h3 className={styles.serviceCardTitle}>{title}</h3>
               <p className={isDark ? styles.serviceCardDescDark : styles.serviceCardDesc}>{desc}</p>
-              <CreaPrototipoButton
-                variant="ghost"
-                className={isDark ? styles.serviceLinkDark : styles.serviceLink}
-              >
-                Crea tu Prototipo <ArrowRight className={styles.iconSm} aria-hidden />
-              </CreaPrototipoButton>
             </article>
           )
         })}

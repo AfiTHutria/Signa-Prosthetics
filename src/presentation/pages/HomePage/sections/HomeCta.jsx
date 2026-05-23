@@ -34,13 +34,13 @@ export function HomeCta() {
             </ul>
           </div>
           <div className={styles.ctaActionCard}>
+
             <p className={styles.ctaActionLabel}>Acceso por perfil</p>
-            <RoleAccessButtons layout="column" />
             <p className={styles.ctaActionHint}>
               Cada perfil tiene su login y panel independiente.
             </p>
             <CreaPrototipoButton variant="primary" />
-            <DemoDashboardAccess />
+
           </div>
         </div>
       </div>

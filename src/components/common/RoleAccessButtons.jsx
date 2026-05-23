@@ -3,14 +3,14 @@ import { Stethoscope, User } from 'lucide-react'
 import { ROUTES } from '@/routes/paths'
 import styles from './RoleAccessButtons.module.css'
 
-export function RoleAccessButtons({ layout = 'row', className = '' }) {
+export function RoleAccessButtons({ layout = 'row', className = '', onNavigate }) {
   return (
     <div className={`${styles.wrap} ${styles[layout]} ${className}`.trim()}>
-      <Link to={ROUTES.AUTH_USER} className={styles.btnUser}>
+      <Link to={ROUTES.AUTH_USER} className={styles.btnUser} onClick={onNavigate}>
         <User size={16} aria-hidden />
         Acceso Usuario
       </Link>
-      <Link to={ROUTES.AUTH_PROFESSIONAL} className={styles.btnPro}>
+      <Link to={ROUTES.AUTH_PROFESSIONAL} className={styles.btnPro} onClick={onNavigate}>
         <Stethoscope size={16} aria-hidden />
         Acceso Profesional
       </Link>

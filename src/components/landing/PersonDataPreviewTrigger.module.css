@@ -1,10 +1,11 @@
 .trigger {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: clamp(0.65rem, 3vw, 1rem);
   width: 100%;
-  padding: 1.25rem 1rem;
-  border-radius: 1.25rem;
+  min-width: 0;
+  padding: clamp(0.875rem, 3vw, 1.25rem) clamp(0.75rem, 3vw, 1rem);
+  border-radius: clamp(0.875rem, 2vw, 1.25rem);
   border: 2px dashed var(--primary, oklch(0.62 0.16 152));
   background: linear-gradient(
     135deg,
@@ -31,8 +32,8 @@
   display: grid;
   place-items: center;
   flex-shrink: 0;
-  width: 3.25rem;
-  height: 3.25rem;
+  width: clamp(2.5rem, 10vw, 3.25rem);
+  height: clamp(2.5rem, 10vw, 3.25rem);
   border-radius: 1rem;
   background: var(--primary);
   color: var(--primary-foreground);
@@ -40,6 +41,7 @@
 
 .text {
   flex: 1;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
@@ -47,13 +49,14 @@
 
 .title {
   font-family: var(--font-display, 'Outfit', system-ui, sans-serif);
-  font-size: 1rem;
+  font-size: clamp(0.875rem, 3.5vw, 1rem);
   font-weight: 600;
   color: var(--foreground);
+  line-height: 1.25;
 }
 
 .desc {
-  font-size: 0.8125rem;
+  font-size: clamp(0.75rem, 2.8vw, 0.8125rem);
   color: var(--muted-foreground);
   line-height: 1.4;
 }
@@ -61,4 +64,18 @@
 .chevron {
   flex-shrink: 0;
   color: var(--primary);
+}
+
+@media (max-width: 380px) {
+  .trigger {
+    flex-wrap: wrap;
+  }
+
+  .chevron {
+    display: none;
+  }
+
+  .text {
+    flex-basis: calc(100% - 3rem);
+  }
 }

@@ -37,3 +37,15 @@
   transform: translateY(-1px);
   box-shadow: 0 8px 24px rgb(56 189 248 / 0.25);
 }
+
+@media (max-width: 767px) {
+  .wrap.column {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .wrap.column .btnUser,
+  .wrap.column .btnPro {
+    width: 100%;
+  }
+}

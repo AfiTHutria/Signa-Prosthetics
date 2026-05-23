@@ -11,19 +11,13 @@ const FEATURES = [
   'Acompañamiento emocional en cada decisión',
 ]
 
-const META = [
-  { k: 'Tipo', v: 'Transradial' },
-  { k: 'Uso', v: 'Deportivo' },
-  { k: 'Material', v: 'Fibra de C.' },
-]
-
 export function HomeProstheticAssistant() {
   const [panelOpen, setPanelOpen] = useState(false)
 
   return (
     <section id="protesis" className={styles.prostheticSection}>
       <div className={styles.prostheticGrid}>
-        <div>
+        <div className={styles.prostheticCopy}>
           <p className={styles.sectionKicker}>Asistente de prótesis</p>
           <h2 className={styles.sectionTitle}>
             Diseña una prótesis que se sienta{' '}
@@ -46,34 +40,8 @@ export function HomeProstheticAssistant() {
           </ul>
 
           <CreaPrototipoButton variant="accent" className={styles.protoCta} />
-        </div>
 
-        <div className={styles.prostheticVisual}>
-          <div className={styles.prostheticBlob} aria-hidden />
-          <div className={styles.mockCard}>
-            <div className={styles.mockHead}>
-              <p className={styles.cardTitle}>Tu prótesis · Borrador 03</p>
-              <span className={styles.badge}>IA activa</span>
-            </div>
-
-            <div className={styles.mockMetaGrid}>
-              {META.map((c) => (
-                <div key={c.k} className={styles.mockMetaCell}>
-                  <p className={styles.mockMetaKey}>{c.k}</p>
-                  <p className={styles.mockMetaVal}>{c.v}</p>
-                </div>
-              ))}
-            </div>
-
-            <div className={styles.mockPreview}>
-              <PersonDataPreviewTrigger onClick={() => setPanelOpen(true)} />
-            </div>
-
-            <div className={styles.confidenceBar}>
-              <span style={{ fontWeight: 500 }}>Confianza del modelo</span>
-              <span className={styles.confidenceValue}>94%</span>
-            </div>
-          </div>
+          <PersonDataPreviewTrigger onClick={() => setPanelOpen(true)} />
         </div>
       </div>
 

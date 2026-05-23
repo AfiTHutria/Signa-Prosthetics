@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import {
   Activity,
+  Bot,
   Box,
   Calendar,
   ClipboardList,
@@ -12,6 +13,7 @@ import {
 } from 'lucide-react'
 import { DashboardLayout } from '@/components/layout/DashboardLayout'
 import { PersonDataForm } from '@/components/landing/PersonDataForm'
+import { AiCompanionPanel } from '@/components/ai-companion/AiCompanionPanel'
 import { ROUTES } from '@/routes/paths'
 import { useAuth } from '@/hooks/useAuth'
 import {
@@ -25,6 +27,7 @@ import styles from './UserDashboard.module.css'
 
 const NAV = [
   { id: 'overview', label: 'Resumen', icon: <Activity size={16} /> },
+  { id: 'assistant', label: 'Asistente IA', icon: <Bot size={16} /> },
   { id: 'data', label: 'Mis datos', icon: <ClipboardList size={16} /> },
   { id: 'timeline', label: 'Timeline', icon: <History size={16} /> },
   { id: 'files', label: 'Archivos', icon: <FileUp size={16} /> },
@@ -83,6 +86,20 @@ export function UserDashboard() {
           </div>
         </div>
       </motion.div>
+
+      {(section === 'overview' || section === 'assistant') && section === 'assistant' && (
+        <motion.section
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          layout
+        >
+          <AiCompanionPanel
+            userId={user?.id ?? 'demo-user'}
+            displayName={user?.name ?? personValues.fullName}
+            personContext={personValues}
+          />
+        </motion.section>
+      )}
 
       {(section === 'overview' || section === 'data') && (
         <div className={styles.grid}>
