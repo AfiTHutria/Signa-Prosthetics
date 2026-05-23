@@ -51,11 +51,11 @@ export function HomeNav() {
           onClick={closeMenu}
         >
           <span className={styles.brandMark}>
-            R
+            S
           </span>
 
           <span className={styles.brandName}>
-            Reandar
+            Signa-Prostetics
           </span>
         </Link>
 
