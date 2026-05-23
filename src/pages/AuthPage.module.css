@@ -1,0 +1,31 @@
+.page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% -20%, rgb(94 245 216 / 0.15), transparent),
+    #050a12;
+}
+
+.card {
+  width: 100%;
+  max-width: 26rem;
+  padding: 1.75rem;
+  border-radius: 1.25rem;
+  border: 1px solid rgb(94 245 216 / 0.2);
+  background: rgb(12 24 42 / 0.9);
+}
+
+.homeLink {
+  display: block;
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.8125rem;
+  color: #5eead4;
+  text-decoration: none;
+}
+
+.homeLink:hover {
+  text-decoration: underline;
+}

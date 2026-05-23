@@ -1,0 +1,93 @@
+export const PERSON_DATA_SECTIONS = [
+  {
+    id: 'personal',
+    title: 'Datos personales',
+    fields: [
+      { id: 'fullName', label: 'Nombre completo', placeholder: 'Ej. Mariana Ortiz García', type: 'text' },
+      { id: 'document', label: 'Documento de identidad', placeholder: 'Ej. CC 1.023.456.789', type: 'text' },
+      { id: 'email', label: 'Correo electrónico', placeholder: 'correo@ejemplo.com', type: 'email' },
+      { id: 'phone', label: 'Teléfono / WhatsApp', placeholder: '+57 300 000 0000', type: 'tel' },
+      { id: 'age', label: 'Edad', placeholder: 'Ej. 34', type: 'number' },
+      { id: 'city', label: 'Ciudad de residencia', placeholder: 'Ej. Medellín', type: 'text' },
+    ],
+  },
+  {
+    id: 'amputation',
+    title: 'Información de amputación',
+    fields: [
+      { id: 'amputationType', label: 'Tipo de amputación', placeholder: 'Transradial, transtibial…', type: 'text' },
+      { id: 'side', label: 'Lateralidad', placeholder: 'Derecha / Izquierda / Bilateral', type: 'text' },
+      { id: 'amputationDate', label: 'Fecha de amputación', placeholder: 'MM / AAAA', type: 'text' },
+      { id: 'cause', label: 'Causa', placeholder: 'Traumática, congénita, médica…', type: 'text' },
+      { id: 'stumpCondition', label: 'Estado del muñón', placeholder: 'Cicatrización, sensibilidad, volumen…', type: 'textarea' },
+    ],
+  },
+  {
+    id: 'activity',
+    title: 'Rutina y actividad',
+    fields: [
+      { id: 'activityLevel', label: 'Nivel de actividad', placeholder: 'Sedentario, moderado, alto rendimiento', type: 'text' },
+      { id: 'sports', label: 'Deportes o hobbies', placeholder: 'Ciclismo, natación, trabajo de oficina…', type: 'text' },
+      { id: 'dailyUse', label: 'Uso diario esperado', placeholder: 'Horas por día, tareas frecuentes', type: 'text' },
+      { id: 'workEnvironment', label: 'Entorno laboral', placeholder: 'Oficina, campo, manual, mixto', type: 'text' },
+    ],
+  },
+  {
+    id: 'prosthetic',
+    title: 'Preferencias de prótesis',
+    fields: [
+      { id: 'prostheticType', label: 'Tipo de prótesis deseada', placeholder: 'Mecánica, mioeléctrica, deportiva…', type: 'text' },
+      { id: 'material', label: 'Material preferido', placeholder: 'Fibra de carbono, titanio, silicona…', type: 'text' },
+      { id: 'functions', label: 'Funciones requeridas', placeholder: 'Agarre fino, rotación, agarre firme…', type: 'textarea' },
+      { id: 'aesthetic', label: 'Preferencias estéticas', placeholder: 'Color, acabado, cobertura', type: 'text' },
+    ],
+  },
+  {
+    id: 'clinical',
+    title: 'Información clínica',
+    fields: [
+      { id: 'doctor', label: 'Médico / ortopedista', placeholder: 'Nombre del profesional tratante', type: 'text' },
+      { id: 'institution', label: 'Centro de rehabilitación', placeholder: 'Clínica o IPS', type: 'text' },
+      { id: 'allergies', label: 'Alergias o sensibilidades', placeholder: 'Materiales, adhesivos, látex…', type: 'text' },
+      { id: 'notes', label: 'Observaciones adicionales', placeholder: 'Cualquier detalle relevante para el diseño', type: 'textarea' },
+    ],
+  },
+  {
+    id: 'measurements',
+    title: 'Medidas (si las tienes)',
+    fields: [
+      { id: 'stumpLength', label: 'Longitud del muñón (cm)', placeholder: 'Ej. 18', type: 'number' },
+      { id: 'stumpCircumference', label: 'Circunferencia del muñón (cm)', placeholder: 'Ej. 24', type: 'number' },
+      { id: 'dominantSide', label: 'Miembro dominante', placeholder: 'Derecho / Izquierdo', type: 'text' },
+    ],
+  },
+]
+
+export const DEMO_PERSON_DATA = {
+  fullName: 'Mariana Ortiz García',
+  document: 'CC 1.023.456.789',
+  email: 'mariana@ejemplo.com',
+  phone: '+57 300 123 4567',
+  age: '34',
+  city: 'Medellín',
+  amputationType: 'Transradial',
+  side: 'Derecha',
+  amputationDate: '03 / 2021',
+  cause: 'Traumática',
+  stumpCondition: 'Cicatrización completa, ligera sensibilidad en borde distal.',
+  activityLevel: 'Moderado — alto',
+  sports: 'Ciclismo recreativo, yoga',
+  dailyUse: '8 h · trabajo y tareas domésticas',
+  workEnvironment: 'Mixto (oficina + campo ocasional)',
+  prostheticType: 'Mioeléctrica deportiva',
+  material: 'Fibra de carbono',
+  functions: 'Agarre fino, rotación de muñeca, agarre firme para manillar.',
+  aesthetic: 'Acabado mate, tono piel natural',
+  doctor: 'Dra. Lucía Méndez',
+  institution: 'Centro Reandar · Rehabilitación',
+  allergies: 'Ninguna conocida',
+  notes: 'Priorizar ligereza para uso prolongado en bicicleta.',
+  stumpLength: '18',
+  stumpCircumference: '24',
+  dominantSide: 'Derecho',
+}

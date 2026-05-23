@@ -17,4 +17,15 @@ export default defineConfig({
       localsConvention: 'camelCase',
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('framer-motion')) return 'motion'
+          if (id.includes('node_modules')) return 'vendor'
+        },
+      },
+    },
+    chunkSizeWarningLimit: 600,
+  },
 })

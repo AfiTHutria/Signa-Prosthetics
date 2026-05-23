@@ -1,0 +1,15 @@
+:root {
+  --dash-bg: #050a12;
+  --dash-bg-soft: #0b1424;
+  --dash-surface: rgb(12 24 42 / 0.72);
+  --dash-border: rgb(94 245 216 / 0.18);
+  --dash-text: #e8f4ff;
+  --dash-muted: #8ba3b8;
+  --dash-accent: #5eead4;
+  --dash-accent-2: #38bdf8;
+  --dash-warn: #ffae3b;
+  --dash-danger: #f87171;
+  --dash-glass: blur(18px) saturate(160%);
+  --dash-radius: 1rem;
+  --dash-shadow: 0 24px 60px -24px rgb(0 0 0 / 0.65);
+}

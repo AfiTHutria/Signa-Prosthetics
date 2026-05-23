@@ -1,0 +1,39 @@
+.wrap {
+  display: flex;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.column {
+  flex-direction: column;
+}
+
+.btnUser,
+.btnPro {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.65rem 1rem;
+  border-radius: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btnUser {
+  background: linear-gradient(135deg, #5eead4, #38bdf8);
+  color: #041018;
+}
+
+.btnPro {
+  background: linear-gradient(135deg, #38bdf8, #818cf8);
+  color: #041018;
+}
+
+.btnUser:hover,
+.btnPro:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgb(56 189 248 / 0.25);
+}

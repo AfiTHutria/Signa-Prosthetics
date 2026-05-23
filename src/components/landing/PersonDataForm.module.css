@@ -1,0 +1,63 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.sectionTitle {
+  margin: 0 0 0.65rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--dash-accent, #5eead4);
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid rgb(94 234 212 / 0.2);
+}
+
+.fieldGrid {
+  display: grid;
+  gap: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .fieldGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .field:has(textarea) {
+    grid-column: 1 / -1;
+  }
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.label {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #94a3b8;
+}
+
+.input {
+  width: 100%;
+  padding: 0.55rem 0.75rem;
+  border-radius: 0.65rem;
+  border: 1px solid rgb(94 234 212 / 0.15);
+  background: rgb(5 10 18 / 0.6);
+  color: #f1f5f9;
+  font-size: 0.8125rem;
+  font-family: inherit;
+  resize: vertical;
+}
+
+.input::placeholder {
+  color: #64748b;
+}
+
+.input:read-only {
+  cursor: default;
+}

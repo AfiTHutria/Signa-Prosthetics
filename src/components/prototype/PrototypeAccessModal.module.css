@@ -1,0 +1,137 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: 1.25rem;
+  background: rgb(2 6 12 / 0.72);
+  backdrop-filter: blur(8px);
+}
+
+.modal {
+  position: relative;
+  width: 100%;
+  max-width: 32rem;
+  padding: 1.75rem;
+  border-radius: 1.25rem;
+  border: 1px solid rgb(94 245 216 / 0.22);
+  background: linear-gradient(160deg, rgb(15 28 48 / 0.95), rgb(5 10 18 / 0.98));
+  box-shadow: 0 32px 80px -20px rgb(0 0 0 / 0.75);
+}
+
+.close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  border-radius: 0.5rem;
+  background: rgb(255 255 255 / 0.06);
+  color: #cbd5e1;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.close:hover {
+  background: rgb(255 255 255 / 0.12);
+}
+
+.header {
+  margin-bottom: 1.25rem;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid rgb(94 245 216 / 0.25);
+  background: rgb(94 245 216 / 0.08);
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #5eead4;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.title {
+  margin: 0.85rem 0 0;
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: #f8fafc;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  margin: 0.5rem 0 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #94a3b8;
+}
+
+.options {
+  display: grid;
+  gap: 0.85rem;
+}
+
+@media (min-width: 520px) {
+  .options {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.optionCard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 1.1rem;
+  border-radius: 1rem;
+  border: 1px solid rgb(94 245 216 / 0.18);
+  background: rgb(255 255 255 / 0.03);
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.2s, border-color 0.2s, background 0.2s;
+}
+
+.optionCard:hover {
+  transform: translateY(-2px);
+  border-color: rgb(94 245 216 / 0.45);
+  background: rgb(94 245 216 / 0.06);
+}
+
+.optionCardPro:hover {
+  border-color: rgb(56 189 248 / 0.45);
+  background: rgb(56 189 248 / 0.06);
+}
+
+.optionIcon {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.75rem;
+  background: linear-gradient(135deg, rgb(94 245 216 / 0.2), rgb(56 189 248 / 0.15));
+  color: #5eead4;
+}
+
+.optionCardPro .optionIcon {
+  color: #38bdf8;
+}
+
+.optionTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #f1f5f9;
+}
+
+.optionDesc {
+  font-size: 0.78rem;
+  line-height: 1.4;
+  color: #94a3b8;
+}

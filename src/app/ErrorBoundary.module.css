@@ -1,0 +1,26 @@
+.wrap {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem;
+  text-align: center;
+  background: var(--color-bg, #0f1419);
+  color: var(--color-text, #f0f4f8);
+}
+
+.wrap button {
+  padding: 0.65rem 1.25rem;
+  border-radius: 8px;
+  border: none;
+  background: #3b82f6;
+  color: #fff;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.wrap button:hover {
+  background: #2563eb;
+}

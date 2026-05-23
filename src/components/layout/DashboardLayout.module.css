@@ -1,0 +1,192 @@
+.shell {
+  display: grid;
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse 80% 50% at 10% -10%, rgb(94 245 216 / 0.12), transparent),
+    radial-gradient(ellipse 60% 40% at 100% 0%, rgb(56 189 248 / 0.1), transparent),
+    var(--dash-bg, #050a12);
+  color: var(--dash-text, #e8f4ff);
+}
+
+@media (min-width: 900px) {
+  .shell {
+    grid-template-columns: 260px 1fr;
+  }
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.25rem;
+  border-bottom: 1px solid var(--dash-border);
+  background: var(--dash-surface);
+  backdrop-filter: var(--dash-glass);
+}
+
+@media (min-width: 900px) {
+  .sidebar {
+    border-bottom: none;
+    border-right: 1px solid var(--dash-border);
+    min-height: 100vh;
+  }
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.logo {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.75rem;
+  background: linear-gradient(135deg, #5eead4, #38bdf8);
+  color: #041018;
+}
+
+.brandName {
+  margin: 0;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.brandTag {
+  margin: 0;
+  font-size: 0.7rem;
+  color: var(--dash-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.nav {
+  display: flex;
+  flex-direction: row;
+  gap: 0.35rem;
+  overflow-x: auto;
+}
+
+@media (min-width: 900px) {
+  .nav {
+    flex-direction: column;
+    overflow: visible;
+  }
+}
+
+.navLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: 0.75rem;
+  border: none;
+  background: none;
+  color: var(--dash-muted);
+  font-size: 0.875rem;
+  font-family: inherit;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.navLink:hover {
+  background: rgb(255 255 255 / 0.04);
+  color: var(--dash-text);
+}
+
+.navLinkActive {
+  background: rgb(94 245 216 / 0.12);
+  color: var(--dash-accent);
+}
+
+.userBox {
+  margin-top: auto;
+  padding: 0.85rem;
+  border-radius: var(--dash-radius);
+  border: 1px solid var(--dash-border);
+  background: rgb(0 0 0 / 0.2);
+}
+
+.userName {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.roleBadgeUser,
+.roleBadgePro {
+  display: inline-block;
+  margin-top: 0.35rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.roleBadgeUser {
+  background: rgb(94 245 216 / 0.15);
+  color: var(--dash-accent);
+}
+
+.roleBadgePro {
+  background: rgb(56 189 248 / 0.15);
+  color: var(--dash-accent-2);
+}
+
+.userEmail {
+  margin: 0.35rem 0 0.65rem;
+  font-size: 0.7rem;
+  color: var(--dash-muted);
+  word-break: break-all;
+}
+
+.shellUser {
+  --dash-accent: #5eead4;
+}
+
+.shellPro {
+  --dash-accent: #38bdf8;
+}
+
+.logout {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--dash-accent);
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.main {
+  min-width: 0;
+}
+
+.header {
+  padding: 1.25rem 1.25rem 0;
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(1.35rem, 3vw, 1.75rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  margin: 0.35rem 0 0;
+  color: var(--dash-muted);
+  font-size: 0.9rem;
+}
+
+.content {
+  padding: 1.25rem;
+}
