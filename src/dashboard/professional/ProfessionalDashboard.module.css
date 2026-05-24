@@ -142,12 +142,57 @@
 }
 
 .detailCard {
-  padding: 1.15rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--dash-gap-md, 1rem);
+  padding: 1.25rem 1.35rem;
   border-radius: var(--dash-radius);
   border: 1px solid var(--dash-border);
   background: var(--dash-surface);
   backdrop-filter: var(--dash-glass);
   box-shadow: var(--dash-shadow);
+  max-height: calc(100vh - 10rem);
+  overflow: hidden;
+}
+
+.reportScroll {
+  flex: 1;
+  min-height: 12rem;
+  max-height: min(52vh, 520px);
+  overflow-y: auto;
+  padding-right: 0.35rem;
+  margin: 0.25rem 0;
+  scrollbar-width: thin;
+}
+
+.reportFullCard {
+  padding: 1.5rem 1.75rem;
+  border-radius: var(--dash-radius);
+  border: 1px solid var(--dash-border);
+  background: var(--dash-surface);
+  backdrop-filter: var(--dash-glass);
+  box-shadow: var(--dash-shadow);
+}
+
+.reportHeader {
+  margin-bottom: var(--dash-gap-lg, 1.5rem);
+  padding-bottom: var(--dash-gap-md, 1rem);
+  border-bottom: 1px solid rgb(255 255 255 / 0.06);
+}
+
+.reportFullTitle {
+  margin: 0.35rem 0 0;
+  font-size: clamp(1.15rem, 2.5vw, 1.4rem);
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+}
+
+.reportFullSub {
+  margin: 0.5rem 0 0;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--dash-muted);
 }
 
 .detailKicker {
@@ -159,14 +204,17 @@
 }
 
 .detailName {
-  margin: 0.35rem 0 0;
-  font-size: 1.25rem;
+  margin: 0;
+  font-size: 1.15rem;
   font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
 }
 
 .detailProto {
-  margin: 0.25rem 0 0.75rem;
+  margin: 0;
   font-size: 0.875rem;
+  line-height: 1.5;
   color: var(--dash-muted);
 }
 
@@ -178,16 +226,11 @@
   margin-bottom: 0.5rem;
 }
 
-.detailStatus {
-  margin: 0 0 1rem;
-  font-size: 0.8125rem;
-}
-
 .detailActions {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin-bottom: 1rem;
+  flex-shrink: 0;
 }
 
 .obsTitle {
@@ -287,4 +330,21 @@
 .fileList li {
   padding: 0.45rem 0;
   border-bottom: 1px solid rgb(255 255 255 / 0.05);
+}
+
+.fileList a {
+  color: var(--dash-accent-2);
+  text-decoration: none;
+  word-break: break-all;
+}
+
+.fileList a:hover {
+  text-decoration: underline;
+}
+
+.filesHint {
+  margin: 0 0 0.75rem;
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  color: var(--dash-muted);
 }

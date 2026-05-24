@@ -1,12 +1,14 @@
+import { CARLOS_PERSON_DATA } from '@/services/report/reportToPersonData'
+
 export const PERSON_DATA_SECTIONS = [
   {
     id: 'personal',
     title: 'Datos personales',
     fields: [
-      { id: 'fullName', label: 'Nombre completo', placeholder: 'Ej. Mariana Ortiz García', type: 'text' },
-      { id: 'document', label: 'Documento de identidad', placeholder: 'Ej. CC 1.023.456.789', type: 'text' },
+      { id: 'fullName', label: 'Nombre completo', placeholder: 'Ej. Carlos Mendoza López', type: 'text' },
+      { id: 'document', label: 'Documento de identidad', placeholder: 'Ej. CC 1.045.892.103', type: 'text' },
       { id: 'email', label: 'Correo electrónico', placeholder: 'correo@ejemplo.com', type: 'email' },
-      { id: 'phone', label: 'Teléfono / WhatsApp', placeholder: '+57 300 000 0000', type: 'tel' },
+      { id: 'phone', label: 'Teléfono / WhatsApp', placeholder: '+57 310 456 7890', type: 'tel' },
       { id: 'age', label: 'Edad', placeholder: 'Ej. 34', type: 'number' },
       { id: 'city', label: 'Ciudad de residencia', placeholder: 'Ej. Medellín', type: 'text' },
     ],
@@ -15,31 +17,31 @@ export const PERSON_DATA_SECTIONS = [
     id: 'amputation',
     title: 'Información de amputación',
     fields: [
-      { id: 'amputationType', label: 'Tipo de amputación', placeholder: 'Transradial, transtibial…', type: 'text' },
-      { id: 'side', label: 'Lateralidad', placeholder: 'Derecha / Izquierda / Bilateral', type: 'text' },
-      { id: 'amputationDate', label: 'Fecha de amputación', placeholder: 'MM / AAAA', type: 'text' },
+      { id: 'amputationType', label: 'Tipo de amputación', placeholder: 'Transtibial, transradial…', type: 'text' },
+      { id: 'side', label: 'Lateralidad', placeholder: 'Izquierda / Derecha', type: 'text' },
+      { id: 'amputationDate', label: 'Tiempo desde amputación', placeholder: 'Ej. 2 años', type: 'text' },
       { id: 'cause', label: 'Causa', placeholder: 'Traumática, congénita, médica…', type: 'text' },
-      { id: 'stumpCondition', label: 'Estado del muñón', placeholder: 'Cicatrización, sensibilidad, volumen…', type: 'textarea' },
+      { id: 'stumpCondition', label: 'Estado del muñón', placeholder: 'Dolor, piel, sensibilidad…', type: 'textarea' },
     ],
   },
   {
     id: 'activity',
     title: 'Rutina y actividad',
     fields: [
-      { id: 'activityLevel', label: 'Nivel de actividad', placeholder: 'Sedentario, moderado, alto rendimiento', type: 'text' },
-      { id: 'sports', label: 'Deportes o hobbies', placeholder: 'Ciclismo, natación, trabajo de oficina…', type: 'text' },
-      { id: 'dailyUse', label: 'Uso diario esperado', placeholder: 'Horas por día, tareas frecuentes', type: 'text' },
-      { id: 'workEnvironment', label: 'Entorno laboral', placeholder: 'Oficina, campo, manual, mixto', type: 'text' },
+      { id: 'activityLevel', label: 'Nivel de actividad', placeholder: 'Moderado, sedentario…', type: 'text' },
+      { id: 'sports', label: 'Actividades prioritarias', placeholder: 'Caminar, escaleras, transporte…', type: 'text' },
+      { id: 'dailyUse', label: 'Uso diario esperado', placeholder: 'Horas y objetivo principal', type: 'text' },
+      { id: 'workEnvironment', label: 'Entorno', placeholder: 'Clima, terreno, transporte…', type: 'text' },
     ],
   },
   {
     id: 'prosthetic',
     title: 'Preferencias de prótesis',
     fields: [
-      { id: 'prostheticType', label: 'Tipo de prótesis deseada', placeholder: 'Mecánica, mioeléctrica, deportiva…', type: 'text' },
-      { id: 'material', label: 'Material preferido', placeholder: 'Fibra de carbono, titanio, silicona…', type: 'text' },
-      { id: 'functions', label: 'Funciones requeridas', placeholder: 'Agarre fino, rotación, agarre firme…', type: 'textarea' },
-      { id: 'aesthetic', label: 'Preferencias estéticas', placeholder: 'Color, acabado, cobertura', type: 'text' },
+      { id: 'prostheticType', label: 'Tipo de prótesis deseada', placeholder: 'Transtibial deportiva…', type: 'text' },
+      { id: 'material', label: 'Material preferido', placeholder: 'Fibra de carbono…', type: 'text' },
+      { id: 'functions', label: 'Prioridades', placeholder: 'Comodidad, resistencia…', type: 'textarea' },
+      { id: 'aesthetic', label: 'Preferencias estéticas', placeholder: 'Discreta / natural', type: 'text' },
     ],
   },
   {
@@ -48,46 +50,20 @@ export const PERSON_DATA_SECTIONS = [
     fields: [
       { id: 'doctor', label: 'Médico / ortopedista', placeholder: 'Nombre del profesional tratante', type: 'text' },
       { id: 'institution', label: 'Centro de rehabilitación', placeholder: 'Clínica o IPS', type: 'text' },
-      { id: 'allergies', label: 'Alergias o sensibilidades', placeholder: 'Materiales, adhesivos, látex…', type: 'text' },
-      { id: 'notes', label: 'Observaciones adicionales', placeholder: 'Cualquier detalle relevante para el diseño', type: 'textarea' },
+      { id: 'allergies', label: 'Alergias o sensibilidades', placeholder: 'Materiales, adhesivos…', type: 'text' },
+      { id: 'notes', label: 'Preocupaciones y expectativas', placeholder: 'Dolor prolongado, independencia laboral…', type: 'textarea' },
     ],
   },
   {
     id: 'measurements',
     title: 'Medidas (si las tienes)',
     fields: [
-      { id: 'stumpLength', label: 'Longitud del muñón (cm)', placeholder: 'Ej. 18', type: 'number' },
-      { id: 'stumpCircumference', label: 'Circunferencia del muñón (cm)', placeholder: 'Ej. 24', type: 'number' },
+      { id: 'stumpLength', label: 'Longitud del muñón (cm)', placeholder: 'Ej. 20', type: 'number' },
+      { id: 'stumpCircumference', label: 'Circunferencia del muñón (cm)', placeholder: 'Ej. 27', type: 'number' },
       { id: 'dominantSide', label: 'Miembro dominante', placeholder: 'Derecho / Izquierdo', type: 'text' },
     ],
   },
 ]
 
-export const DEMO_PERSON_DATA = {
-  fullName: 'Mariana Ortiz García',
-  document: 'CC 1.023.456.789',
-  email: 'mariana@ejemplo.com',
-  phone: '+57 300 123 4567',
-  age: '34',
-  city: 'Medellín',
-  amputationType: 'Transradial',
-  side: 'Derecha',
-  amputationDate: '03 / 2021',
-  cause: 'Traumática',
-  stumpCondition: 'Cicatrización completa, ligera sensibilidad en borde distal.',
-  activityLevel: 'Moderado — alto',
-  sports: 'Ciclismo recreativo, yoga',
-  dailyUse: '8 h · trabajo y tareas domésticas',
-  workEnvironment: 'Mixto (oficina + campo ocasional)',
-  prostheticType: 'Mioeléctrica deportiva',
-  material: 'Fibra de carbono',
-  functions: 'Agarre fino, rotación de muñeca, agarre firme para manillar.',
-  aesthetic: 'Acabado mate, tono piel natural',
-  doctor: 'Dra. Lucía Méndez',
-  institution: 'Centro Reandar · Rehabilitación',
-  allergies: 'Ninguna conocida',
-  notes: 'Priorizar ligereza para uso prolongado en bicicleta.',
-  stumpLength: '18',
-  stumpCircumference: '24',
-  dominantSide: 'Derecho',
-}
+/** Datos demo del paciente Carlos Mendoza (sincronizado con /datos_reporte). */
+export const DEMO_PERSON_DATA = CARLOS_PERSON_DATA

@@ -16,14 +16,14 @@ export function HomeTestimonial() {
           <div>
             <Quote className={styles.quoteIcon} aria-hidden />
             <p className={styles.quoteText}>
-              &ldquo;Después de mi amputación pensé que perdería mi independencia. Reandar me devolvió
-              la confianza, y mi prótesis se siente como una extensión real de mí.&rdquo;
+              &ldquo;Necesitaba volver a caminar y trabajar de pie con estabilidad. Con el diseño
+              transtibial y el seguimiento del equipo, recuperé confianza en mi día a día.&rdquo;
             </p>
             <div className={styles.quoteAuthor}>
               <div className={styles.quoteAvatar} aria-hidden />
               <div>
-                <p className={styles.quoteName}>Mariana Ortiz</p>
-                <p className={styles.quoteRole}>Usuaria desde 2024</p>
+                <p className={styles.quoteName}>Carlos Mendoza López</p>
+                <p className={styles.quoteRole}>Comercio · pierna izquierda</p>
               </div>
             </div>
           </div>

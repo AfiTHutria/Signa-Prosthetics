@@ -10,9 +10,9 @@ import { LandingProstheticArm } from '@/components/landing/LandingProstheticArm'
 import styles from '../HomePage.module.css'
 
 const PROSTHETIC_META = [
-  { k: 'Tipo', v: 'Transradial' },
-  { k: 'Uso', v: 'Deportivo' },
-  { k: 'Material', v: 'Fibra de C.' },
+  { k: 'Tipo', v: 'Transtibial' },
+  { k: 'Lado', v: 'Izquierdo' },
+  { k: 'Uso', v: '8 h / día' },
 ]
 
 const AVATAR_COLORS = ['#a8d5ba', '#7ed6a3', '#f4d35e', '#86c79b']
@@ -30,13 +30,15 @@ export function HomeHero() {
           <span className={styles.eyebrow}>
             <Sparkles className={styles.iconSm} aria-hidden /> Acompañamiento humano + tecnología
           </span>
-          <h1 className={styles.heroTitle}>
-            Volver a ti, <span className={styles.heroTitleAccent}>paso a paso.</span>
-          </h1>
-          <p className={styles.heroSubtitle}>
-            Una plataforma de seguimiento psicológico para personas con amputación, con asistente
-            inteligente para el diseño personalizado de tu prótesis.
-          </p>
+          <div className={styles.heroCopy}>
+            <h1 className={styles.heroTitle}>
+              Volver a ti, <span className={styles.heroTitleAccent}>paso a paso.</span>
+            </h1>
+            <p className={styles.heroSubtitle}>
+              Una plataforma de seguimiento psicológico para personas con amputación, con asistente
+              inteligente para el diseño personalizado de tu prótesis.
+            </p>
+          </div>
 
           <div className={styles.heroActions}>
             <CreaPrototipoButton variant="accent" />

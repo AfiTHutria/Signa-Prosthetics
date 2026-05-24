@@ -7,6 +7,16 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 export default defineConfig({
   plugins: [react()],
+  server: {
+    proxy: {
+      '/api/datos_reporte': {
+        target: 'https://neuter-acrobat-flatten.ngrok-free.dev',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+        headers: { 'ngrok-skip-browser-warning': 'true' },
+      },
+    },
+  },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),

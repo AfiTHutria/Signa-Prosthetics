@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
 import {
   ClipboardList,
@@ -9,6 +9,14 @@ import {
   FolderOpen,
 } from 'lucide-react'
 import { DashboardLayout } from '@/components/layout/DashboardLayout'
+import { PatientReportPanel } from '@/components/professional/PatientReportPanel'
+import { useDatosReporte } from '@/hooks/useDatosReporte'
+import {
+  buildCaseRowFromReport,
+  getPatientDisplayName,
+  getReportSummarySubtitle,
+  getReportSummaryTitle,
+} from '@/services/report/reportDisplay'
 import { ROUTES } from '@/routes/paths'
 import { PROFESSIONAL_USERS } from '@/prototype/mockData'
 import styles from './ProfessionalDashboard.module.css'
@@ -22,9 +30,20 @@ const NAV = [
 
 export function ProfessionalDashboard() {
   const [section, setSection] = useState('cases')
-  const [selectedId, setSelectedId] = useState(PROFESSIONAL_USERS[0]?.id)
+  const [selectedId, setSelectedId] = useState('report-patient')
+  const { report, status, error, fromDemo, reload } = useDatosReporte()
 
-  const selected = PROFESSIONAL_USERS.find((u) => u.id === selectedId) ?? PROFESSIONAL_USERS[0]
+  const caseRows = useMemo(() => {
+    if (report) return [buildCaseRowFromReport(report)]
+    return PROFESSIONAL_USERS
+  }, [report])
+
+  useEffect(() => {
+    if (report) setSelectedId('report-patient')
+  }, [report])
+
+  const selected =
+    caseRows.find((u) => u.id === selectedId) ?? caseRows[0] ?? PROFESSIONAL_USERS[0]
 
   const navItems = NAV.map((item) => ({
     ...item,
@@ -33,6 +52,13 @@ export function ProfessionalDashboard() {
     active: section === item.id,
     onClick: () => setSection(item.id),
   }))
+
+  const reportTitle = report ? getReportSummaryTitle(report) : selected?.name ?? 'Reporte'
+  const reportSubtitle = report
+    ? getReportSummarySubtitle(report)
+    : selected?.prototype ?? ''
+
+  const patientName = report ? getPatientDisplayName(report) : selected?.name
 
   return (
     <DashboardLayout
@@ -43,9 +69,13 @@ export function ProfessionalDashboard() {
     >
       <div className={styles.stats}>
         {[
-          { label: 'Usuarios activos', value: '24', icon: <Users size={18} /> },
-          { label: 'Prototipos en curso', value: '12', icon: <FileText size={18} /> },
-          { label: 'Validaciones hoy', value: '5', icon: <CheckCircle2 size={18} /> },
+          { label: 'Usuarios activos', value: report ? '1' : '24', icon: <Users size={18} /> },
+          { label: 'Prototipos en curso', value: '1', icon: <FileText size={18} /> },
+          {
+            label: 'Alertas clínicas',
+            value: report?.professionalFlags?.requires_pain_review ? '2' : '5',
+            icon: <CheckCircle2 size={18} />,
+          },
         ].map((stat, i) => (
           <motion.div
             key={stat.label}
@@ -61,7 +91,26 @@ export function ProfessionalDashboard() {
         ))}
       </div>
 
-      {(section === 'cases' || section === 'reports') && (
+      {section === 'reports' && (
+        <motion.section className={styles.reportFullCard} layout>
+          <header className={styles.reportHeader}>
+            <div>
+              <p className={styles.detailKicker}>Informe clínico · API</p>
+              <h3 className={styles.reportFullTitle}>{reportTitle}</h3>
+              {reportSubtitle && <p className={styles.reportFullSub}>{reportSubtitle}</p>}
+            </div>
+          </header>
+          <PatientReportPanel
+            report={report}
+            status={status}
+            error={error}
+            fromDemo={fromDemo}
+            onReload={reload}
+          />
+        </motion.section>
+      )}
+
+      {section === 'cases' && (
         <div className={styles.casesLayout}>
           <motion.section className={styles.tableCard} layout>
             <h3 className={styles.tableTitle}>
@@ -71,14 +120,14 @@ export function ProfessionalDashboard() {
               <table className={styles.table}>
                 <thead>
                   <tr>
-                    <th>Usuario</th>
-                    <th>Prototipo</th>
+                    <th>Paciente</th>
+                    <th>Prótesis</th>
                     <th>Estado</th>
                     <th>Progreso</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {PROFESSIONAL_USERS.map((row) => (
+                  {caseRows.map((row) => (
                     <tr
                       key={row.id}
                       className={row.id === selectedId ? styles.rowSelected : ''}
@@ -111,28 +160,46 @@ export function ProfessionalDashboard() {
           </motion.section>
 
           <motion.aside className={styles.detailCard} layout>
-            <p className={styles.detailKicker}>Caso seleccionado</p>
-            <h3 className={styles.detailName}>{selected.name}</h3>
-            <p className={styles.detailProto}>{selected.prototype}</p>
-            <div className={styles.detailProgress}>
-              <div
-                className={styles.rowProgressFill}
-                style={{ width: `${selected.progress}%` }}
+            <p className={styles.detailKicker}>Datos del reporte</p>
+            <h3 className={styles.detailName}>{reportTitle}</h3>
+            <p className={styles.detailProto}>{reportSubtitle || selected?.status}</p>
+
+            {report && (
+              <div className={styles.detailProgress}>
+                <div
+                  className={styles.rowProgressFill}
+                  style={{ width: `${selected?.progress ?? 0}%` }}
+                />
+              </div>
+            )}
+
+            <div className={styles.reportScroll}>
+              <PatientReportPanel
+                report={report}
+                status={status}
+                error={error}
+                fromDemo={fromDemo}
+                onReload={reload}
               />
             </div>
-            <p className={styles.detailStatus}>Estado: {selected.status}</p>
+
             <div className={styles.detailActions}>
               <button type="button" className={styles.actionBtn}>
                 Validar avance
               </button>
-              <button type="button" className={styles.actionBtnGhost}>
-                Ver informe
+              <button
+                type="button"
+                className={styles.actionBtnGhost}
+                onClick={() => setSection('reports')}
+              >
+                Ver informe completo
               </button>
             </div>
+
             <h4 className={styles.obsTitle}>Observaciones técnicas</h4>
             <textarea
               className={styles.textarea}
-              placeholder={`Notas para ${selected.name}…`}
+              placeholder={`Notas para ${patientName}…`}
               rows={4}
             />
             <button type="button" className={styles.saveBtn}>
@@ -149,13 +216,10 @@ export function ProfessionalDashboard() {
           </h3>
           <ul className={styles.sessionList}>
             <li>
-              <strong>Mariana Ortiz</strong> — Revisión prototipo · 24 May 16:00
+              <strong>{patientName}</strong> — Revisión prototipo transtibial · 24 May 16:00
             </li>
             <li>
-              <strong>Carlos Ruiz</strong> — Entrega fabricación · 26 May 10:00
-            </li>
-            <li>
-              <strong>Ana Beltrán</strong> — Escaneo inicial · 28 May 09:30
+              <strong>Ana Beltrán</strong> — Entrega fabricación · 26 May 10:00
             </li>
           </ul>
         </motion.section>
@@ -164,13 +228,31 @@ export function ProfessionalDashboard() {
       {section === 'files' && (
         <motion.section className={styles.card} layout>
           <h3 className={styles.cardTitle}>
-            <FolderOpen size={16} /> Archivos clínicos
+            <FolderOpen size={16} /> Archivos clínicos — {patientName}
           </h3>
-          <ul className={styles.fileList}>
-            <li>mariana_scan.stl · 22 MB</li>
-            <li>informe_biomecanico.pdf · 1.2 MB</li>
-            <li>ajuste_copla_v3.glb · 8 MB</li>
-          </ul>
+          {report?.modeloMiembro || report?.modeloProtesis ? (
+            <ul className={styles.fileList}>
+              {report.modeloMiembro && (
+                <li>
+                  <a href={report.modeloMiembro} target="_blank" rel="noreferrer">
+                    miembro-izquierdo-transtibial.stl
+                  </a>
+                </li>
+              )}
+              {report.modeloProtesis && (
+                <li>
+                  <a href={report.modeloProtesis} target="_blank" rel="noreferrer">
+                    protesis-izquierda-transtibial.stl
+                  </a>
+                </li>
+              )}
+            </ul>
+          ) : (
+            <p className={styles.filesHint}>
+              Los enlaces STL vienen en la respuesta de la API (`modelo miembro` y `modelo
+              protesis`). Si caducaron, pulsa «Actualizar desde API».
+            </p>
+          )}
           <button type="button" className={styles.uploadBtn}>
             Subir archivo clínico
           </button>

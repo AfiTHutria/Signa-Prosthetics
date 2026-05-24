@@ -13,12 +13,15 @@ Frontend de la aplicación Signa Prosthetics, construido con React y Vite.
 npm install
 ```
 
-Copia `.env.example` a `.env` y completa las variables:
+Copia `.env.example` a `.env` en la **raíz** y completa las variables:
 
-- `VITE_API_URL`
-- `VITE_SUPABASE_URL`
-- `VITE_SUPABASE_ANON_KEY`
-- `VITE_LIVEKIT_URL`
+- `VITE_API_URL` — URL de tu backend (ej. `http://localhost:3000/api`)
+- `VITE_LIVEKIT_URL` — WebSocket LiveKit (asistente IA)
+- `VITE_SUPABASE_URL` / `VITE_SUPABASE_ANON_KEY` — opcional
+
+**Guía detallada:** [`docs/CONFIGURACION-API.md`](docs/CONFIGURACION-API.md)
+
+Para LiveKit, también configura `server/.env` (ver [`server/README.md`](server/README.md)) y ejecuta `cd server && npm run dev`.
 
 ## Scripts
 

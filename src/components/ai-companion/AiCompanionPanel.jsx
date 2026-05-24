@@ -136,7 +136,6 @@ export function AiCompanionPanel({ userId, displayName, personContext = {} }) {
         <div className={styles.mediaColumn}>
           <div className={styles.videoStack}>
             <div className={styles.videoTile}>
-              <p className={styles.videoLabel}>Tú</p>
               {mode === 'livekit' && isActive ? (
                 <video ref={localVideoRef} className={styles.video} autoPlay muted playsInline />
               ) : (
@@ -219,13 +218,12 @@ export function AiCompanionPanel({ userId, displayName, personContext = {} }) {
             {messages.map((msg) => (
               <li
                 key={msg.id}
-                className={`${styles.message} ${
-                  msg.from === 'user'
-                    ? styles.messageUser
-                    : msg.from === 'system'
-                      ? styles.messageSystem
-                      : styles.messageAssistant
-                }`}
+                className={`${styles.message} ${msg.from === 'user'
+                  ? styles.messageUser
+                  : msg.from === 'system'
+                    ? styles.messageSystem
+                    : styles.messageAssistant
+                  }`}
               >
                 <p className={styles.messageText}>{msg.message}</p>
               </li>

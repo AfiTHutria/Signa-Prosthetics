@@ -4,8 +4,8 @@ export const DEMO_ACCOUNTS = {
   [ROLE.USER]: {
     email: 'usuario@signa.com',
     password: 'usuario123',
-    name: 'Mariana Ortiz',
-    id: 'usr-001',
+    name: 'Carlos Mendoza López',
+    id: 'usr-carlos-001',
   },
   [ROLE.PROFESSIONAL]: {
     email: 'profesional@signa.com',

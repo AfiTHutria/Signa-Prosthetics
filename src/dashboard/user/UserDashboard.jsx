@@ -23,12 +23,13 @@ import {
   USER_TIMELINE,
 } from '@/prototype/mockData'
 import { DEMO_PERSON_DATA } from '@/shared/constants/personDataFields'
+import { useDatosReporte } from '@/hooks/useDatosReporte'
+import { reportToPersonData } from '@/services/report/reportToPersonData'
 import styles from './UserDashboard.module.css'
 
 const NAV = [
   { id: 'overview', label: 'Resumen', icon: <Activity size={16} /> },
   { id: 'assistant', label: 'Asistente IA', icon: <Bot size={16} /> },
-  { id: 'data', label: 'Mis datos', icon: <ClipboardList size={16} /> },
   { id: 'timeline', label: 'Timeline', icon: <History size={16} /> },
   { id: 'files', label: 'Archivos', icon: <FileUp size={16} /> },
 ]
@@ -36,11 +37,13 @@ const NAV = [
 export function UserDashboard() {
   const { user } = useAuth()
   const [section, setSection] = useState('overview')
+  const { report } = useDatosReporte()
 
   const personValues = {
     ...DEMO_PERSON_DATA,
+    ...(report ? reportToPersonData(report) : {}),
     fullName: user?.name ?? DEMO_PERSON_DATA.fullName,
-    email: user?.email ?? DEMO_PERSON_DATA.email,
+    email: user?.email?.includes('@') ? user.email : DEMO_PERSON_DATA.email,
   }
 
   const navItems = NAV.map((item) => ({
@@ -63,6 +66,7 @@ export function UserDashboard() {
         className={styles.welcome}
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.35 }}
       >
         <div className={styles.welcomeText}>
           <p className={styles.welcomeHi}>Hola, {user?.name?.split(' ')[0] ?? 'Usuario'}</p>
@@ -129,12 +133,7 @@ export function UserDashboard() {
             </motion.section>
           )}
 
-          <motion.section className={styles.card} layout>
-            <h3 className={styles.cardTitle}>
-              <ClipboardList size={16} /> Datos de evaluación
-            </h3>
-            <PersonDataForm values={personValues} />
-          </motion.section>
+
         </div>
       )}
 
@@ -148,9 +147,8 @@ export function UserDashboard() {
               {USER_TIMELINE.map((step) => (
                 <li
                   key={step.id}
-                  className={`${styles.timelineItem} ${
-                    step.active ? styles.timelineActive : ''
-                  } ${step.done ? styles.timelineDone : ''}`.trim()}
+                  className={`${styles.timelineItem} ${step.active ? styles.timelineActive : ''
+                    } ${step.done ? styles.timelineDone : ''}`.trim()}
                 >
                   <span className={styles.timelineDot} />
                   <div>
