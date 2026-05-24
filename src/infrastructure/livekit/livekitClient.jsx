@@ -291,6 +291,13 @@ export class LiveKitClient {
     return this.enableMedia()
   }
 
+  /** Solo micrófono (entrevista de voz, sin cámara) */
+  async enableMicrophoneOnly() {
+    await this.startAudio()
+    await this.room?.localParticipant.setMicrophoneEnabled(true)
+    await this.room?.localParticipant.setCameraEnabled(false)
+  }
+
   attachLocalVideo(element) {
     const pub = this.room?.localParticipant.getTrackPublication(Track.Source.Camera)
     const track = pub?.videoTrack

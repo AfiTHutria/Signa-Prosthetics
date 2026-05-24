@@ -97,11 +97,7 @@ export function UserDashboard() {
           animate={{ opacity: 1, y: 0 }}
           layout
         >
-          <AiCompanionPanel
-            userId={user?.id ?? 'demo-user'}
-            displayName={user?.name ?? personValues.fullName}
-            personContext={personValues}
-          />
+          <AiCompanionPanel />
         </motion.section>
       )}
 

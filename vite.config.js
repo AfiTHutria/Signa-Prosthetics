@@ -15,6 +15,11 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/api/, ''),
         headers: { 'ngrok-skip-browser-warning': 'true' },
       },
+      '/signa-intake-api': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/signa-intake-api/, ''),
+      },
     },
   },
   resolve: {

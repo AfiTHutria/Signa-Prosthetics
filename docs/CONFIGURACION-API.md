@@ -1,6 +1,6 @@
 # Dónde colocar la API — Signa Prosthetics
 
-Guía rápida: **no pegues la API en el código React**. Va en archivos `.env` en la raíz del proyecto y (si usas LiveKit) en `server/.env`.
+Guía rápida: **no pegues la API en el código React**. Va en archivos `.env` en la raíz del proyecto.
 
 ---
 
@@ -22,8 +22,9 @@ copy .env.example .env
 
 | Variable | Ejemplo | Para qué sirve |
 |----------|---------|----------------|
-| `VITE_API_URL` | `http://localhost:3000/api` | URL base de tu backend (login, tokens LiveKit, etc.) |
-| `VITE_LIVEKIT_URL` | `wss://tu-proyecto.livekit.cloud` | Servidor WebSocket de LiveKit (asistente IA en vivo) |
+| `VITE_API_URL` | `http://localhost:3000/api` | URL base de tu backend (login, etc.) |
+| `VITE_INTAKE_API_URL` | `/signa-intake-api` | signa-api — entrevista de voz (Asistente IA) |
+| `VITE_LIVEKIT_URL` | `wss://tu-proyecto.livekit.cloud` | Opcional — legacy |
 | `VITE_SUPABASE_URL` | `https://xxx.supabase.co` | Opcional — base de datos Supabase |
 | `VITE_SUPABASE_ANON_KEY` | `eyJhbG...` | Opcional — clave pública de Supabase |
 | `VITE_REPORT_API_URL` | `https://....ngrok-free.dev/datos_reporte` | Reporte clínico — panel profesional |
@@ -32,67 +33,84 @@ copy .env.example .env
 
 ```env
 VITE_API_URL=http://localhost:3000/api
-VITE_LIVEKIT_URL=wss://signa-demo-xxxxx.livekit.cloud
+VITE_INTAKE_API_URL=/signa-intake-api
+VITE_LIVEKIT_URL=
 VITE_SUPABASE_URL=
 VITE_SUPABASE_ANON_KEY=
 ```
 
 > **Importante:** En Vite solo las variables que empiezan con `VITE_` llegan al navegador. Después de cambiar `.env`, reinicia `npm run dev`.
 
-### Dónde se usa en el código (no edites salvo que sepas qué haces)
+### Dónde se usa en el código
 
 | Archivo | Uso |
 |---------|-----|
 | `src/shared/constants/env.jsx` | Lee `import.meta.env.VITE_*` |
 | `src/infrastructure/api/axiosClient.jsx` | `baseURL` = `VITE_API_URL` |
 | `src/services/authService.jsx` | `POST /auth/user/login`, `POST /auth/professional/login` |
-| `src/infrastructure/livekit/livekitTokenApi.jsx` | `GET /livekit/token?room=...&identity=...` |
+| `src/infrastructure/livekit/intakeTokenApi.jsx` | `GET /api/livekit/token` en signa-api |
 
 ---
 
-## 2. Servidor de tokens (carpeta `server/`)
+## 2. Asistente IA — signa-api (entrevista de voz)
 
-Incluido en el repo para **LiveKit** (JWT de sala). No es tu API de negocio completa, pero es lo que el frontend llama hoy para el asistente IA.
+El **Asistente IA** usa el proyecto [signa-api](../signa-api/) como backend. signa-api genera tokens LiveKit, despacha el agente `intake-agent` y ejecuta la conversación de voz con Gemini.
 
-### Archivo que debes crear
-
-```
-Signa-Prostetics/server/.env
-```
+### Arrancar signa-api
 
 ```bash
-cd server
-copy .env.example .env
-```
-
-### Variables en `server/.env`
-
-| Variable | Dónde obtenerla |
-|----------|-----------------|
-| `LIVEKIT_API_KEY` | [LiveKit Cloud](https://cloud.livekit.io/) → proyecto → API Keys |
-| `LIVEKIT_API_SECRET` | Misma pantalla |
-| `LIVEKIT_URL` | `wss://...` de tu proyecto LiveKit |
-| `PORT` | `3000` (por defecto) |
-
-### Arrancar el servidor
-
-```bash
-cd server
+cd signa-api
 npm install
-npm run dev
+# Configura .env con LIVEKIT_URL, LIVEKIT_API_KEY, LIVEKIT_API_SECRET, GEMINI_API_KEY
+npm run dev:all   # web server + agent worker
 ```
 
 Debe responder en: `http://localhost:3000/api/health`
 
-El frontend con `VITE_API_URL=http://localhost:3000/api` llamará a:
+### Proxy Vite (desarrollo, evita CORS)
+
+signa-api no expone CORS. En desarrollo, Vite proxifica las peticiones:
 
 ```
-GET http://localhost:3000/api/livekit/token?room=...&identity=...
+Frontend (:5173) → /signa-intake-api/api/livekit/token → signa-api (:3000)
 ```
+
+Configura en `.env`:
+
+```env
+VITE_INTAKE_API_URL=/signa-intake-api
+```
+
+El proxy está definido en `vite.config.js`.
+
+### Producción
+
+En producción, apunta directamente a signa-api:
+
+```env
+VITE_INTAKE_API_URL=https://tu-signa-api.com
+```
+
+O sirve frontend y signa-api desde el mismo origen. Si son dominios distintos, signa-api necesitará headers CORS en rutas `/api/*`.
+
+### Flujo de prueba
+
+1. Terminal 1: `cd signa-api && npm run dev:all`
+2. Terminal 2: `cd Signa-Prosthetics && npm run dev`
+3. Login demo → Dashboard usuario → **Asistente IA**
+4. **Iniciar entrevista** → permitir micrófono → conversación de voz
 
 ---
 
-## 3. Si tienes TU propia API (backend externo)
+## 3. Servidor de tokens local (carpeta `server/`)
+
+Incluido en el repo como alternativa legacy para tokens LiveKit. **No se usa para Asistente IA** (usa signa-api). Puede servir para otras integraciones LiveKit.
+
+Ver [`server/README.md`](../server/README.md) si lo necesitas.
+
+---
+
+## 4. Si tienes TU propia API (backend externo)
 
 Si tu API está en otro host (Railway, Render, Supabase Edge, etc.):
 
@@ -108,7 +126,6 @@ VITE_API_URL=https://tu-api.com/api
 |--------|------|-----------|
 | `POST` | `/auth/user/login` | Login usuario |
 | `POST` | `/auth/professional/login` | Login profesional |
-| `GET` | `/livekit/token?room=&identity=` | Asistente IA LiveKit |
 
 Respuesta esperada del login:
 
@@ -124,54 +141,29 @@ Respuesta esperada del login:
 }
 ```
 
-Respuesta de LiveKit token:
-
-```json
-{
-  "token": "jwt-livekit",
-  "url": "wss://tu-proyecto.livekit.cloud"
-}
-```
-
 3. **No** pongas `LIVEKIT_API_SECRET` en el frontend. Solo en el servidor.
 
 ---
 
-## 4. Modo demo (sin API)
+## 5. Modo demo (sin API)
 
 Si dejas `VITE_API_URL` vacío o el backend no responde:
 
 - El **login** usa cuentas demo locales (`authService.jsx`).
-- El **asistente IA** funciona en modo texto demo (sin LiveKit).
+- El **Asistente IA** requiere `VITE_INTAKE_API_URL` — sin ella muestra un aviso de configuración.
 
 ---
 
-## 5. Comprobar que todo está bien
-
-1. **API local**
-
-```bash
-# Terminal 1 — servidor tokens
-cd server && npm run dev
-
-# Terminal 2 — frontend
-npm run dev
-```
-
-2. Abre en el navegador: `http://localhost:3000/api/health` → debe devolver `{"ok":true,...}`
-
-3. En el dashboard usuario → **Asistente IA** → si LiveKit está bien, conectará sin el aviso de configuración.
-
----
-
-## Resumen en una imagen mental
+## Resumen
 
 ```
 Tu PC
-├── .env                    ← VITE_API_URL, VITE_LIVEKIT_URL (frontend)
-├── src/.../axiosClient.jsx ← usa VITE_API_URL automáticamente
-└── server/
-    └── .env                ← LIVEKIT_API_KEY, SECRET, URL (backend)
+├── Signa-Prosthetics/
+│   ├── .env                         ← VITE_INTAKE_API_URL=/signa-intake-api
+│   └── vite.config.js               ← proxy → signa-api :3000
+└── signa-api/
+    ├── .env                         ← LIVEKIT_*, GEMINI_API_KEY
+    └── npm run dev:all              ← web + intake-agent worker
 ```
 
-**¿Dudas?** Revisa también `server/README.md` y `.env.example` en la raíz.
+**¿Dudas?** Revisa `.env.example` en la raíz y el README de signa-api.
