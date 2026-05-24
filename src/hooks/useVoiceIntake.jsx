@@ -30,15 +30,10 @@ export function useVoiceIntake() {
     }
   }, [])
 
-  const markAgentJoined = useCallback(
-    (participantIdentity) => {
+  const markAgentJoined = useCallback(() => {
       agentJoinedRef.current = true
       clearAgentJoinTimeout()
-      setAgentStatus(
-        participantIdentity
-          ? `El asistente está en la sala (${participantIdentity}). Puedes hablar.`
-          : 'El asistente está en la sala. Puedes hablar.',
-      )
+      setAgentStatus('El asistente está en la sala. Puedes hablar.')
     },
     [clearAgentJoinTimeout],
   )
@@ -97,7 +92,7 @@ export function useVoiceIntake() {
 
             const agent = client.activeAgent
             if (agent) {
-              markAgentJoined(agent.identity)
+              markAgentJoined()
             } else {
               setAgentStatus('Esperando al asistente...')
               startAgentJoinTimeout()
@@ -114,7 +109,7 @@ export function useVoiceIntake() {
         },
         onAgentChange: (agent) => {
           if (agent) {
-            markAgentJoined(agent.identity)
+            markAgentJoined()
           } else if (clientRef.current?.isConnected) {
             agentJoinedRef.current = false
             setAgentStatus('Esperando al asistente...')
