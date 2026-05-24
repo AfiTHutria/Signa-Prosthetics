@@ -6,7 +6,6 @@ import {
   Users,
   Calendar,
   CheckCircle2,
-  FolderOpen,
 } from 'lucide-react'
 import { DashboardLayout } from '@/components/layout/DashboardLayout'
 import { PatientReportPanel } from '@/components/professional/PatientReportPanel'
@@ -25,7 +24,6 @@ const NAV = [
   { id: 'cases', label: 'Casos', icon: <Users size={16} /> },
   { id: 'reports', label: 'Informes', icon: <FileText size={16} /> },
   { id: 'sessions', label: 'Sesiones', icon: <Calendar size={16} /> },
-  { id: 'files', label: 'Archivos', icon: <FolderOpen size={16} /> },
 ]
 
 export function ProfessionalDashboard() {
@@ -225,39 +223,6 @@ export function ProfessionalDashboard() {
         </motion.section>
       )}
 
-      {section === 'files' && (
-        <motion.section className={styles.card} layout>
-          <h3 className={styles.cardTitle}>
-            <FolderOpen size={16} /> Archivos clínicos — {patientName}
-          </h3>
-          {report?.modeloMiembro || report?.modeloProtesis ? (
-            <ul className={styles.fileList}>
-              {report.modeloMiembro && (
-                <li>
-                  <a href={report.modeloMiembro} target="_blank" rel="noreferrer">
-                    miembro-izquierdo-transtibial.stl
-                  </a>
-                </li>
-              )}
-              {report.modeloProtesis && (
-                <li>
-                  <a href={report.modeloProtesis} target="_blank" rel="noreferrer">
-                    protesis-izquierda-transtibial.stl
-                  </a>
-                </li>
-              )}
-            </ul>
-          ) : (
-            <p className={styles.filesHint}>
-              Los enlaces STL vienen en la respuesta de la API (`modelo miembro` y `modelo
-              protesis`). Si caducaron, pulsa «Actualizar desde API».
-            </p>
-          )}
-          <button type="button" className={styles.uploadBtn}>
-            Subir archivo clínico
-          </button>
-        </motion.section>
-      )}
     </DashboardLayout>
   )
 }

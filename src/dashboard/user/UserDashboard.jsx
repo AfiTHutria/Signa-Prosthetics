@@ -3,10 +3,8 @@ import { motion } from 'framer-motion'
 import {
   Activity,
   Bot,
-  Box,
   Calendar,
   ClipboardList,
-  FileUp,
   MessageSquare,
   History,
   Layers3,
@@ -31,7 +29,6 @@ const NAV = [
   { id: 'overview', label: 'Resumen', icon: <Activity size={16} /> },
   { id: 'assistant', label: 'Asistente IA', icon: <Bot size={16} /> },
   { id: 'timeline', label: 'Timeline', icon: <History size={16} /> },
-  { id: 'files', label: 'Archivos', icon: <FileUp size={16} /> },
 ]
 
 export function UserDashboard() {
@@ -189,31 +186,6 @@ export function UserDashboard() {
         </div>
       )}
 
-      {(section === 'overview' || section === 'files') && (
-        <div className={styles.grid}>
-          <motion.section className={`${styles.card} ${styles.uploadCard}`} layout>
-            <h3 className={styles.cardTitle}>
-              <FileUp size={16} /> Subir archivos
-            </h3>
-            <div className={styles.dropzone}>
-              <Box size={28} className={styles.dropIcon} />
-              <p>Arrastra imágenes o informes clínicos</p>
-              <button type="button" className={styles.uploadBtn}>
-                Seleccionar archivos
-              </button>
-            </div>
-          </motion.section>
-
-          <motion.section className={styles.card} layout>
-            <h3 className={styles.cardTitle}>Historial de versiones</h3>
-            <ul className={styles.history}>
-              <li>v3 · Ajuste de copla — 20 May 2026</li>
-              <li>v2 · Optimización IA — 15 May 2026</li>
-              <li>v1 · Escaneo inicial — 12 May 2026</li>
-            </ul>
-          </motion.section>
-        </div>
-      )}
     </DashboardLayout>
   )
 }
