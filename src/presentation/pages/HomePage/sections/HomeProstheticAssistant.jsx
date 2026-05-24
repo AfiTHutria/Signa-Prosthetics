@@ -1,14 +1,13 @@
 import { useState } from 'react'
 import { PersonDataPanel } from '@/components/landing/PersonDataPanel'
-import { PersonDataPreviewTrigger } from '@/components/landing/PersonDataPreviewTrigger'
-import { CreaPrototipoButton } from '@/components/common/CreaPrototipoButton'
+
 import styles from '../HomePage.module.css'
 
 const FEATURES = [
-  'Escaneo guiado desde tu celular',
-  'Recomendaciones según rutina y deporte',
+  'Escaneo 3D',
+  'Recomendaciones según rutina y Actividad',
   'Conexión con talleres ortopédicos aliados',
-  'Acompañamiento emocional en cada decisión',
+  'Acompañamiento  en cada decisión',
 ]
 
 export function HomeProstheticAssistant() {
@@ -23,10 +22,7 @@ export function HomeProstheticAssistant() {
             Diseña una prótesis que se sienta{' '}
             <span className={styles.prostheticTitleAccent}>tuya.</span>
           </h2>
-          <p className={styles.sectionDesc}>
-            Responde unas preguntas sobre tu tipo de amputación, rutina y preferencias. Nuestra IA,
-            validada por ortopedistas, te recomienda materiales, forma y funciones.
-          </p>
+
 
           <ul className={styles.featureList}>
             {FEATURES.map((text) => (

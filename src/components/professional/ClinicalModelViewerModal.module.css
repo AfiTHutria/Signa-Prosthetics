@@ -1,0 +1,92 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(0.75rem, 3vw, 1.5rem);
+  background: oklch(0.22 0.04 165 / 0.45);
+  backdrop-filter: blur(6px);
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: min(56rem, 100%);
+  max-height: min(92vh, 48rem);
+  border-radius: 1rem;
+  border: 1px solid var(--dash-border);
+  background: var(--signa-card);
+  box-shadow: var(--signa-shadow-soft);
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.15rem 0.75rem;
+  border-bottom: 1px solid var(--dash-border);
+}
+
+.kicker {
+  margin: 0;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--signa-primary);
+}
+
+.title {
+  margin: 0.25rem 0 0;
+  font-family: var(--signa-font-display);
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--dash-text);
+}
+
+.closeBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  flex-shrink: 0;
+  border: 1px solid var(--dash-border);
+  border-radius: 0.65rem;
+  background: var(--signa-secondary);
+  color: var(--dash-text);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.closeBtn:hover {
+  background: var(--signa-primary-soft);
+}
+
+.body {
+  padding: 0.85rem;
+  min-height: 0;
+  overflow: auto;
+}
+
+@media (max-width: 639px) {
+  .overlay {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  .modal {
+    max-height: 94vh;
+    border-radius: 1rem 1rem 0 0;
+  }
+
+  .body {
+    padding: 0.65rem;
+  }
+}

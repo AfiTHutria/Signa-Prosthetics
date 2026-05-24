@@ -1,10 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import {
-  LayoutDashboard,
-  Menu,
-  X,
-} from 'lucide-react'
+import { LayoutDashboard, Menu, X } from 'lucide-react'
 
 import { RoleAccessButtons } from '@/components/common/RoleAccessButtons'
 import { useAuth } from '@/hooks/useAuth'
@@ -41,8 +37,16 @@ export function HomeNav() {
     <header className={styles.nav}>
       <div className={styles.navInner}>
         <Link to="/" className={styles.brand} onClick={closeMenu}>
-          <span className={styles.brandMark}>S</span>
-          <span className={styles.brandName}>Signa-Prostetics</span>
+          <span className={styles.brandLogoWrap}>
+            <img
+              src="/logo-signa.png"
+              alt="Signa"
+              className={styles.brandLogo}
+              width={72}
+              height={22}
+              decoding="async"
+            />
+          </span>
         </Link>
 
         <nav

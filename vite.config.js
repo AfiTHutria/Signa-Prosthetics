@@ -5,6 +5,8 @@ import { fileURLToPath } from 'url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
+const apiTarget = process.env.VITE_DEV_API_PROXY ?? 'http://localhost:8000'
+
 export default defineConfig({
   plugins: [react()],
   server: {
@@ -19,6 +21,11 @@ export default defineConfig({
         target: 'http://localhost:3000',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/signa-intake-api/, ''),
+      },
+      '/api/protesis': {
+        target: apiTarget,
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
       },
     },
   },

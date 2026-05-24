@@ -2,7 +2,6 @@ import '@/presentation/styles/landing-tokens.css'
 import styles from './HomePage.module.css'
 import { HomeNav } from './sections/HomeNav'
 import { HomeHero } from './sections/HomeHero'
-import { HomeServices } from './sections/HomeServices'
 import { HomeProstheticAssistant } from './sections/HomeProstheticAssistant'
 import { HomeProcess } from './sections/HomeProcess'
 import { HomeTestimonial } from './sections/HomeTestimonial'
@@ -14,10 +13,10 @@ export function HomePage() {
     <main className={`landingRoot ${styles.page}`}>
       <HomeNav />
       <HomeHero />
-      <HomeServices />
+
       <HomeProstheticAssistant />
-      <HomeProcess />
-      <HomeTestimonial />
+
+
       <HomeCta />
       <HomeFooter />
     </main>

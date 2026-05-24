@@ -5,9 +5,10 @@ import {
   FileText,
   Users,
   Calendar,
-  CheckCircle2,
 } from 'lucide-react'
 import { DashboardLayout } from '@/components/layout/DashboardLayout'
+import { ClinicalModelsPanel } from '@/components/professional/ClinicalModelsPanel'
+import { ClinicalModelViewerModal } from '@/components/professional/ClinicalModelViewerModal'
 import { PatientReportPanel } from '@/components/professional/PatientReportPanel'
 import { useDatosReporte } from '@/hooks/useDatosReporte'
 import {
@@ -29,7 +30,11 @@ const NAV = [
 export function ProfessionalDashboard() {
   const [section, setSection] = useState('cases')
   const [selectedId, setSelectedId] = useState('report-patient')
+  const [viewer, setViewer] = useState(null)
   const { report, status, error, fromDemo, reload } = useDatosReporte()
+
+  const openViewer = (payload) => setViewer(payload)
+  const closeViewer = () => setViewer(null)
 
   const caseRows = useMemo(() => {
     if (report) return [buildCaseRowFromReport(report)]
@@ -65,29 +70,6 @@ export function ProfessionalDashboard() {
       subtitle="Administración clínica de prototipos inteligentes"
       navItems={navItems}
     >
-      <div className={styles.stats}>
-        {[
-          { label: 'Usuarios activos', value: report ? '1' : '24', icon: <Users size={18} /> },
-          { label: 'Prototipos en curso', value: '1', icon: <FileText size={18} /> },
-          {
-            label: 'Alertas clínicas',
-            value: report?.professionalFlags?.requires_pain_review ? '2' : '5',
-            icon: <CheckCircle2 size={18} />,
-          },
-        ].map((stat, i) => (
-          <motion.div
-            key={stat.label}
-            className={styles.statCard}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.05 }}
-          >
-            <span className={styles.statIcon}>{stat.icon}</span>
-            <p className={styles.statValue}>{stat.value}</p>
-            <p className={styles.statLabel}>{stat.label}</p>
-          </motion.div>
-        ))}
-      </div>
 
       {section === 'reports' && (
         <motion.section className={styles.reportFullCard} layout>
@@ -104,6 +86,11 @@ export function ProfessionalDashboard() {
             error={error}
             fromDemo={fromDemo}
             onReload={reload}
+          />
+          <ClinicalModelsPanel
+            report={report}
+            patientName={patientName}
+            onOpenViewer={openViewer}
           />
         </motion.section>
       )}
@@ -181,6 +168,12 @@ export function ProfessionalDashboard() {
               />
             </div>
 
+            <ClinicalModelsPanel
+              report={report}
+              patientName={patientName}
+              onOpenViewer={openViewer}
+            />
+
             <div className={styles.detailActions}>
               <button type="button" className={styles.actionBtn}>
                 Validar avance
@@ -223,6 +216,13 @@ export function ProfessionalDashboard() {
         </motion.section>
       )}
 
+      <ClinicalModelViewerModal
+        open={Boolean(viewer?.source)}
+        title={viewer?.title ?? 'Modelo 3D'}
+        source={viewer?.source}
+        fileName={viewer?.fileName}
+        onClose={closeViewer}
+      />
     </DashboardLayout>
   )
 }

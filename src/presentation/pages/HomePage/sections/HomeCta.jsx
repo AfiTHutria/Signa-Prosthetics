@@ -5,9 +5,9 @@ import { DemoDashboardAccess } from '@/components/common/DemoDashboardAccess'
 import styles from '../HomePage.module.css'
 
 const FEATURES = [
-  { icon: Cpu, text: 'IA biomecánica para diseño de prótesis' },
+
   { icon: Layers, text: 'Visualización 3D de tu muñón en tiempo real' },
-  { icon: ShieldCheck, text: 'Seguimiento clínico con profesionales certificados' },
+  { icon: ShieldCheck, text: 'Seguimiento clínico con profesionales ' },
 ]
 
 export function HomeCta() {
@@ -18,7 +18,7 @@ export function HomeCta() {
           <div>
             <p className={styles.sectionKicker}>Plataforma Signa</p>
             <h2 className={styles.ctaTitle}>
-              De la idea al prototipo <span className={styles.ctaTitleAccent}>inteligente.</span>
+              De la idea al  <span className={styles.ctaTitleAccent}>prediseño</span>
             </h2>
             <p className={styles.ctaDesc}>
               Crea, visualiza y da seguimiento a tu prótesis con dashboards separados: uno para
