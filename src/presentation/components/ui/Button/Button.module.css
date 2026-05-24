@@ -35,3 +35,17 @@
   background: #1e293b;
   color: #f8fafc;
 }
+
+@media (max-width: 374px) {
+  .button {
+    width: 100%;
+    min-height: 2.75rem;
+    font-size: 0.875rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .button {
+    padding: 0.7rem 1.25rem;
+  }
+}

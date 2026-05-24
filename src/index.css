@@ -18,8 +18,43 @@ body {
   min-width: 320px;
   min-height: 100vh;
   overflow-x: hidden;
+  font-family: var(--signa-font-sans, 'Figtree', system-ui, sans-serif);
+  color: var(--signa-foreground, oklch(0.22 0.04 165));
+  background-color: var(--signa-background, oklch(0.995 0.005 150));
 }
 
 #root {
   min-height: 100vh;
+}
+
+/* —— Responsive global —— */
+@media (max-width: 374px) {
+  html {
+    font-size: 15px;
+  }
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 1440px) {
+  html {
+    font-size: 17px;
+  }
+}
+
+@supports (padding: max(0px)) {
+  body {
+    padding-left: max(0px, env(safe-area-inset-left));
+    padding-right: max(0px, env(safe-area-inset-right));
+  }
+}
+
+@media (orientation: landscape) and (max-height: 32rem) {
+  html {
+    scroll-behavior: auto;
+  }
 }

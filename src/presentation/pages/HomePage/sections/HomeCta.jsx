@@ -39,7 +39,6 @@ export function HomeCta() {
             <p className={styles.ctaActionHint}>
               Cada perfil tiene su login y panel independiente.
             </p>
-            <CreaPrototipoButton variant="primary" />
 
           </div>
         </div>

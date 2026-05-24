@@ -234,3 +234,30 @@
     text-align: center;
   }
 }
+
+@media (max-width: 374px) {
+  .title {
+    font-size: 1.125rem;
+  }
+
+  .body {
+    max-height: min(45dvh, 360px);
+  }
+}
+
+@media (min-width: 768px) {
+  .panel {
+    max-width: 42rem;
+    margin-inline: auto;
+  }
+
+  .body {
+    max-height: min(55dvh, 520px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .panel {
+    max-width: 48rem;
+  }
+}

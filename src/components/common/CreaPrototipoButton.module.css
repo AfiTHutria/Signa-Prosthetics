@@ -6,6 +6,7 @@
   border: none;
   border-radius: 999px;
   font-weight: 600;
+  text-decoration: none;
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
 }
@@ -56,4 +57,26 @@
   color: #ecfeff;
   font-size: 0.875rem;
   box-shadow: 0 8px 24px -8px rgb(17 94 89 / 0.6);
+}
+
+@media (max-width: 374px) {
+  .primary,
+  .accent {
+    width: 100%;
+    padding: 0.85rem 1.25rem;
+    font-size: 0.9rem;
+  }
+
+  .ghost,
+  .nav {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (min-width: 768px) {
+  .accent {
+    padding: 1.05rem 2rem;
+    font-size: 1.05rem;
+  }
 }

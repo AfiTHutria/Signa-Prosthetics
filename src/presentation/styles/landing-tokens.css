@@ -79,3 +79,21 @@
     overflow-x: hidden;
   }
 }
+
+@media (max-width: 374px) {
+  .landingRoot {
+    --radius: 0.875rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .landingRoot {
+    --shadow-soft: 0 12px 36px -14px oklch(0.62 0.16 152 / 0.2);
+  }
+}
+
+@media (min-width: 1440px) {
+  .landingRoot {
+    font-size: 1.0625rem;
+  }
+}

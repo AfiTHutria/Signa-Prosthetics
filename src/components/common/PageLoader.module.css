@@ -3,16 +3,17 @@
   display: grid;
   place-items: center;
   gap: 0.75rem;
-  color: #94a3b8;
+  color: var(--dash-muted);
   font-size: 0.875rem;
+  background: var(--signa-gradient-shell);
 }
 
 .spinner {
   width: 2rem;
   height: 2rem;
   border-radius: 50%;
-  border: 2px solid rgb(94 245 216 / 0.2);
-  border-top-color: #5eead4;
+  border: 2px solid oklch(0.62 0.16 152 / 0.2);
+  border-top-color: var(--signa-primary);
   animation: spin 0.7s linear infinite;
 }
 

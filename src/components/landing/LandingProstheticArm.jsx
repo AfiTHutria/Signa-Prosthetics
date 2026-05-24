@@ -10,16 +10,18 @@ import styles from './LandingProstheticArm.module.css'
  * 3. Guía completa:       public/models/README.md
  * 4. Sustituye aquí ProstheticArmPreview por tu visor PLY (PlyModelPreview).
  */
-export function LandingProstheticArm({ hideHeader = false }) {
+export function LandingProstheticArm({ hideHeader = false, layout = 'default' }) {
   return (
-    <div className={styles.root}>
+    <div
+      className={`${styles.root} ${layout === 'hero' ? styles.rootHero : ''}`.trim()}
+    >
       {!hideHeader && (
         <div className={styles.header}>
           <p className={styles.label}>Vista previa 3D</p>
           <p className={styles.title}>Tu brazo protésico</p>
         </div>
       )}
-      <ProstheticArmPreview variant="arm" />
+      <ProstheticArmPreview layout={layout} />
     </div>
   )
 }

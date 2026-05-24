@@ -72,7 +72,7 @@
 
 .table td {
   padding: 0.75rem 0.5rem;
-  border-bottom: 1px solid rgb(255 255 255 / 0.04);
+  border-bottom: 1px solid var(--dash-border);
   vertical-align: middle;
 }
 
@@ -88,14 +88,14 @@
 .rowProgress {
   height: 0.35rem;
   border-radius: 999px;
-  background: rgb(255 255 255 / 0.08);
+  background: var(--signa-secondary);
   overflow: hidden;
   min-width: 5rem;
 }
 
 .rowProgressFill {
   height: 100%;
-  background: linear-gradient(90deg, #38bdf8, #5eead4);
+  background: linear-gradient(90deg, var(--signa-primary), oklch(0.68 0.12 152));
 }
 
 .rowProgressText {
@@ -125,7 +125,7 @@
 }
 
 .actionBtnGhost {
-  background: rgb(255 255 255 / 0.06);
+  background: var(--signa-secondary);
   color: var(--dash-text);
 }
 
@@ -177,7 +177,7 @@
 .reportHeader {
   margin-bottom: var(--dash-gap-lg, 1.5rem);
   padding-bottom: var(--dash-gap-md, 1rem);
-  border-bottom: 1px solid rgb(255 255 255 / 0.06);
+  border-bottom: 1px solid var(--dash-border);
 }
 
 .reportFullTitle {
@@ -221,7 +221,7 @@
 .detailProgress {
   height: 0.45rem;
   border-radius: 999px;
-  background: rgb(255 255 255 / 0.08);
+  background: var(--signa-secondary);
   overflow: hidden;
   margin-bottom: 0.5rem;
 }
@@ -251,8 +251,8 @@
   width: 1.75rem;
   height: 1.75rem;
   border-radius: 50%;
-  background: linear-gradient(135deg, #38bdf8, #5eead4);
-  color: #041018;
+  background: var(--signa-primary);
+  color: var(--signa-primary-foreground);
   font-size: 0.75rem;
   font-weight: 700;
 }
@@ -273,7 +273,7 @@
 
 .sessionList li {
   padding: 0.75rem 0;
-  border-bottom: 1px solid rgb(255 255 255 / 0.06);
+  border-bottom: 1px solid var(--dash-border);
   font-size: 0.875rem;
   color: var(--dash-muted);
 }
@@ -299,7 +299,7 @@
   padding: 0.75rem;
   border-radius: 0.75rem;
   border: 1px solid var(--dash-border);
-  background: rgb(0 0 0 / 0.25);
+  background: var(--signa-secondary);
   color: var(--dash-text);
   font-family: inherit;
   font-size: 0.875rem;
@@ -315,8 +315,8 @@
 .uploadBtn {
   margin-top: 0.75rem;
   padding: 0.6rem 1rem;
-  background: linear-gradient(135deg, #38bdf8, #5eead4);
-  color: #041018;
+  background: var(--signa-primary);
+  color: var(--signa-primary-foreground);
 }
 
 .fileList {
@@ -329,7 +329,7 @@
 
 .fileList li {
   padding: 0.45rem 0;
-  border-bottom: 1px solid rgb(255 255 255 / 0.05);
+  border-bottom: 1px solid var(--dash-border);
 }
 
 .fileList a {
@@ -347,4 +347,77 @@
   font-size: 0.8125rem;
   line-height: 1.55;
   color: var(--dash-muted);
+}
+
+@media (max-width: 699px) {
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  .statCard {
+    padding: 0.9rem 1rem;
+  }
+
+  .statValue {
+    font-size: 1.5rem;
+  }
+
+  .tableCard,
+  .card,
+  .detailCard {
+    padding: 1rem;
+  }
+
+  .tableTitle,
+  .cardTitle {
+    font-size: 0.9rem;
+  }
+
+  .actionBtn,
+  .actionBtnGhost {
+    display: inline-flex;
+    margin-bottom: 0.25rem;
+    min-height: 2.25rem;
+    align-items: center;
+  }
+}
+
+@media (max-width: 479px) {
+  .table {
+    font-size: 0.75rem;
+  }
+
+  .table th,
+  .table td {
+    padding: 0.55rem 0.35rem;
+  }
+
+  .rowProgress {
+    min-width: 3.5rem;
+  }
+
+  .sessionList li {
+    font-size: 0.8125rem;
+    line-height: 1.45;
+  }
+}
+
+@media (min-width: 700px) and (max-width: 999px) {
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .stats .statCard:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 1200px) {
+  .statValue {
+    font-size: 2rem;
+  }
+
+  .detailCard {
+    padding: 1.5rem 1.65rem;
+  }
 }

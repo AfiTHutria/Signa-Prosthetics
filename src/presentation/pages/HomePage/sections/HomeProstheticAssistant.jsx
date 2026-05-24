@@ -39,9 +39,9 @@ export function HomeProstheticAssistant() {
             ))}
           </ul>
 
-          <CreaPrototipoButton variant="accent" className={styles.protoCta} />
 
-          <PersonDataPreviewTrigger onClick={() => setPanelOpen(true)} />
+
+
         </div>
       </div>
 

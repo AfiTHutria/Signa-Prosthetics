@@ -174,7 +174,6 @@
 }
 
 .navRoleBtns {
-  display: none;
   flex-shrink: 1;
   min-width: 0;
 }
@@ -195,6 +194,20 @@
 
 .navDashboardLink:hover {
   background: rgb(94 234 212 / 0.25);
+}
+
+.navDashboardFull {
+  display: none;
+}
+
+@media (min-width: 900px) {
+  .navDashboardShort {
+    display: none;
+  }
+
+  .navDashboardFull {
+    display: inline;
+  }
 }
 
 .iconSm,
@@ -219,10 +232,32 @@
   height: 0.875rem;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 899px) {
+  .navInner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.5rem 0.75rem;
+  }
+
+  .brand {
+    min-width: 0;
+  }
+
+  .brandName {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: clamp(0.9rem, 4.2vw, 1.125rem);
+  }
+
+  .navActions {
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+  }
+
   .navLinks {
-    order: 3;
-    flex-basis: 100%;
+    grid-column: 1 / -1;
     flex-direction: column;
     align-items: stretch;
     gap: 0.25rem;
@@ -234,8 +269,8 @@
     display: flex;
   }
 
-  .navRoleBtnsMobile {
-    display: flex;
+  .navAuthMobile {
+    display: block;
     width: 100%;
     margin-top: 0.5rem;
     padding-top: 0.75rem;
@@ -252,22 +287,27 @@
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 900px) {
+  .navInner {
+    flex-wrap: nowrap;
+    gap: 1rem;
+  }
+
   .navToggle {
     display: none;
   }
 
   .navLinks {
     display: flex;
-    order: unset;
-    flex-basis: auto;
+    flex: 1;
+    justify-content: center;
     flex-direction: row;
     padding: 0;
     border-top: none;
   }
 
-  .navRoleBtns {
-    display: flex;
+  .navActions {
+    flex-shrink: 0;
   }
 
   .navRoleBtns a {
@@ -321,13 +361,17 @@
   position: relative;
   display: grid;
   grid-template-columns: 1fr;
-  align-items: center;
-  gap: 3rem;
+  align-items: start;
+  gap: clamp(2rem, 5vw, 3rem);
 }
 
 .heroAside {
   position: relative;
+  width: 100%;
   min-width: 0;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
 }
 
 .heroCardsRow {
@@ -335,12 +379,13 @@
   grid-template-columns: 1fr;
   gap: 1rem;
   align-items: stretch;
+  width: 100%;
 }
 
-@media (min-width: 900px) {
-  .heroCardsRow {
-    grid-template-columns: 1fr 1fr;
-  }
+.heroCardsRowSolo {
+  width: 100%;
+  max-width: min(100%, 21.5rem);
+  margin-inline: auto;
 }
 
 .heroCard,
@@ -352,23 +397,86 @@
 .heroProstheticCard {
   display: flex;
   flex-direction: column;
+  gap: 0;
+  width: 100%;
+  max-width: 100%;
+  margin-inline: auto;
+  padding: clamp(1.15rem, 3.5vw, 1.5rem);
+  box-sizing: border-box;
+}
+
+.heroProstheticCard .mockHead {
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+/* Tipo + Lado: franja de dos columnas iguales en todo el ancho de la tarjeta */
+.heroMetaStrip {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: 100%;
+  margin-top: 1rem;
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--secondary);
+}
+
+.heroMetaItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+  padding: 0.85rem 0.65rem;
+  text-align: center;
+  min-height: 3.5rem;
+}
+
+.heroMetaItem + .heroMetaItem {
+  border-left: 1px solid var(--border);
+}
+
+.heroMetaKey {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted-foreground);
+  line-height: 1.3;
+}
+
+.heroMetaVal {
+  font-family: var(--font-display);
+  font-size: clamp(0.875rem, 2.5vw, 0.9375rem);
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--foreground);
 }
 
 .heroProstheticCard .mockPreview {
-  flex: 1;
+  margin-top: 0.85rem;
+  width: 100%;
+  min-height: clamp(11rem, 40vw, 17rem);
+  border-radius: 1rem;
+  overflow: hidden;
+  background: var(--secondary);
   display: flex;
   flex-direction: column;
-  min-height: 0;
 }
 
-.heroProstheticCard .mockPreview>* {
+.heroProstheticCard .mockPreview > * {
   flex: 1;
+  width: 100%;
+  min-width: 0;
   min-height: 0;
 }
 
 @media (min-width: 1024px) {
   .heroGrid {
     grid-template-columns: repeat(12, 1fr);
+    align-items: center;
+    gap: clamp(2.5rem, 4vw, 4rem);
   }
 
   .heroContent {
@@ -377,6 +485,16 @@
 
   .heroAside {
     grid-column: span 7;
+    justify-content: center;
+  }
+
+  .heroCardsRowSolo {
+    width: 100%;
+    max-width: min(100%, 32rem);
+  }
+
+  .heroProstheticCard .mockPreview {
+    min-height: clamp(14rem, 24vw, 18rem);
   }
 }
 
@@ -437,9 +555,32 @@
   margin: 0;
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  gap: 1rem;
+  align-items: stretch;
+  gap: 0.75rem;
   width: 100%;
+}
+
+.btnHeroSecondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.9rem 1.35rem;
+  border-radius: 9999px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--foreground);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.2s, border-color 0.2s, background 0.2s;
+}
+
+.btnHeroSecondary:hover {
+  transform: translateY(-2px);
+  border-color: var(--primary);
+  background: var(--primary-soft);
 }
 
 .btnPrimary {
@@ -482,10 +623,16 @@
   margin: 0;
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: clamp(0.75rem, 3vw, 1.25rem);
   font-size: 0.875rem;
   line-height: 1.5;
   color: var(--muted-foreground);
+}
+
+.heroSocialText {
+  margin: 0;
+  max-width: 16rem;
+  line-height: 1.45;
 }
 
 .avatarStack {
@@ -894,11 +1041,12 @@
 }
 
 .mockMetaKey {
+  margin: 0;
   color: var(--muted-foreground);
 }
 
 .mockMetaVal {
-  margin-top: 0.25rem;
+  margin: 0.25rem 0 0;
   font-family: var(--font-display);
   font-size: 0.875rem;
   font-weight: 600;
@@ -1280,8 +1428,14 @@
 /* —— Responsive (móvil y tablet) —— */
 @media (max-width: 767px) {
   .hero {
-    padding-top: clamp(5.5rem, 14vw, 8rem);
+    padding-top: clamp(6.25rem, 16vw, 8.5rem);
     padding-bottom: clamp(3rem, 8vw, 6rem);
+  }
+
+  .eyebrow {
+    max-width: 100%;
+    font-size: clamp(0.6875rem, 3.2vw, 0.8125rem);
+    line-height: 1.35;
   }
 
   .heroBlobPrimary,
@@ -1293,7 +1447,17 @@
   .heroActions {
     flex-direction: column;
     align-items: stretch;
-    gap: 0.75rem;
+    gap: 0.65rem;
+  }
+
+  .heroActions > * {
+    width: 100%;
+  }
+
+  .btnHeroSecondary {
+    width: 100%;
+    padding: 0.875rem 1.25rem;
+    font-size: 0.9375rem;
   }
 
   .btnPrimary,
@@ -1305,9 +1469,39 @@
   }
 
   .heroSocial {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
     gap: 0.75rem;
+  }
+
+  .heroSocialText {
+    max-width: none;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .heroAside {
+    justify-content: center;
+    padding-inline: 0;
+  }
+
+  .heroCardsRowSolo {
+    width: 100%;
+    max-width: min(100%, 20.5rem);
+  }
+
+  .heroProstheticCard {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .heroProstheticCard .mockPreview {
+    min-height: clamp(10.5rem, 44vw, 15rem);
+  }
+
+  .heroMetaItem {
+    padding: 0.75rem 0.5rem;
+    min-height: 3.25rem;
   }
 
   .heroCardHead {
@@ -1432,5 +1626,98 @@
 
   .mockMetaGrid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Pantallas muy pequeñas */
+@media (max-width: 374px) {
+  .brandName {
+    font-size: 1.0625rem;
+  }
+
+  .brandMark {
+    width: 2rem;
+    height: 2rem;
+    font-size: 1rem;
+  }
+
+  .navInner {
+    gap: 0.5rem;
+  }
+
+  .sectionTitle {
+    font-size: clamp(1.35rem, 6vw, 1.75rem);
+  }
+}
+
+/* Tablet */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .heroGrid {
+    gap: 2.5rem;
+  }
+
+  .heroAside {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .heroCardsRowSolo {
+    max-width: min(100%, 26rem);
+  }
+
+  .heroProstheticCard {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .heroProstheticCard .mockPreview {
+    min-height: clamp(12rem, 36vw, 17rem);
+  }
+}
+
+/* Desktop amplio */
+@media (min-width: 1440px) {
+  .container,
+  .navInner,
+  .heroGrid,
+  .section,
+  .prostheticGrid,
+  .testimonialWrap,
+  .ctaSection,
+  .footerInner {
+    max-width: 90rem;
+  }
+
+  .heroTitle {
+    font-size: clamp(2.75rem, 4vw, 3.5rem);
+  }
+}
+
+/* Landscape en móvil */
+@media (orientation: landscape) and (max-height: 32rem) {
+  .hero {
+    padding-top: 4.5rem;
+    padding-bottom: 2rem;
+  }
+
+  .navLinksOpen {
+    max-height: 50vh;
+    overflow-y: auto;
+  }
+}
+
+/* Pantallas táctiles: áreas mínimas de toque */
+@media (hover: none) and (pointer: coarse) {
+  .navToggle,
+  .navCta,
+  .btnPrimary,
+  .btnAccent {
+    min-height: 2.75rem;
+  }
+
+  .navLink {
+    min-height: 2.5rem;
+    display: flex;
+    align-items: center;
   }
 }

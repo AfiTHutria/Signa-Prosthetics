@@ -57,3 +57,28 @@
   opacity: 0.65;
   cursor: wait;
 }
+
+@media (max-width: 479px) {
+  .wrap {
+    margin-top: 1.5rem;
+    padding: 1rem;
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btnUser,
+  .btnPro {
+    width: 100%;
+    justify-content: center;
+    min-height: 2.75rem;
+  }
+}
+
+@media (min-width: 640px) {
+  .actions {
+    gap: 0.85rem;
+  }
+}

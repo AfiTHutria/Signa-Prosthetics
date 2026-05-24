@@ -8,7 +8,11 @@ import styles from './ProstheticArmPreview.module.css'
 
 const PLY_URL = '/models/Prueba_peso.ply'
 
-export function ProstheticArmPreview() {
+export function ProstheticArmPreview({ layout = 'default' }) {
+  const wrapClass =
+    layout === 'hero'
+      ? `${styles.wrap} ${styles.wrapHero}`
+      : styles.wrap
   const mountRef = useRef(null)
 
   const [status, setStatus] = useState('loading')
@@ -292,7 +296,7 @@ export function ProstheticArmPreview() {
   }, [])
 
   return (
-    <div className={styles.wrap}>
+    <div className={wrapClass}>
       <div
         ref={mountRef}
         className={styles.canvas}

@@ -7,7 +7,12 @@
   padding: 1.5rem 1.75rem;
   border-radius: var(--dash-radius);
   border: 1px solid var(--dash-border);
-  background: linear-gradient(135deg, rgb(94 245 216 / 0.1), rgb(56 189 248 / 0.06));
+  background: linear-gradient(
+    135deg,
+    var(--signa-primary-soft) 0%,
+    var(--signa-accent-soft) 100%
+  );
+  box-shadow: var(--signa-shadow-soft);
 }
 
 @media (min-width: 768px) {
@@ -172,14 +177,14 @@
   flex: 1;
   height: 0.55rem;
   border-radius: 999px;
-  background: rgb(255 255 255 / 0.08);
+  background: var(--signa-secondary);
   overflow: hidden;
 }
 
 .progressFill {
   height: 100%;
   border-radius: inherit;
-  background: linear-gradient(90deg, #5eead4, #38bdf8);
+  background: linear-gradient(90deg, var(--signa-primary), oklch(0.58 0.14 152));
 }
 
 .progressLabel {
@@ -209,7 +214,7 @@
   gap: 0.625rem;
   margin: 0 0 var(--dash-gap-lg, 1.5rem);
   padding-bottom: var(--dash-gap-md, 1rem);
-  border-bottom: 1px solid rgb(255 255 255 / 0.06);
+  border-bottom: 1px solid var(--dash-border);
   font-size: 1rem;
   font-weight: 600;
   line-height: var(--dash-leading-tight, 1.25);
@@ -245,7 +250,7 @@
   height: 0.7rem;
   margin-top: 0.4rem;
   border-radius: 50%;
-  background: rgb(255 255 255 / 0.2);
+  background: oklch(0.62 0.16 152 / 0.15);
   flex-shrink: 0;
 }
 
@@ -299,8 +304,8 @@
   gap: var(--dash-gap-sm, 0.625rem);
   padding: 1rem 1.125rem;
   border-radius: 0.85rem;
-  background: rgb(0 0 0 / 0.2);
-  border: 1px solid rgb(255 255 255 / 0.05);
+  background: var(--signa-secondary);
+  border: 1px solid var(--dash-border);
 }
 
 .commentAuthor,
@@ -346,7 +351,7 @@
   letter-spacing: 0.015em;
   color: var(--dash-muted);
   padding: 0.75rem 0;
-  border-bottom: 1px solid rgb(255 255 255 / 0.06);
+  border-bottom: 1px solid var(--dash-border);
 }
 
 .history li:last-child {
@@ -425,5 +430,62 @@
   .quickStats {
     width: 100%;
     justify-content: space-between;
+  }
+}
+
+@media (max-width: 374px) {
+  .welcome {
+    padding: 1.15rem 1.2rem;
+  }
+
+  .welcomeHi {
+    font-size: 1.0625rem;
+  }
+
+  .quickValue {
+    font-size: 1.35rem;
+  }
+
+  .protoName {
+    font-size: 1.1rem;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 1099px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .heroCard {
+    grid-column: 1 / -1;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--dash-gap-lg, 1.5rem);
+  }
+
+  .uploadCard {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1099px) {
+  .welcome {
+    padding: 1.5rem 1.65rem;
+  }
+}
+
+@media (min-width: 1440px) {
+  .grid {
+    gap: 2.25rem;
+  }
+
+  .welcome {
+    padding: 1.75rem 2rem;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 32rem) {
+  .welcome {
+    flex-direction: row;
+    align-items: center;
   }
 }

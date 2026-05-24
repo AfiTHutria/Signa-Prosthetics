@@ -6,11 +6,12 @@
 
 .sectionTitle {
   margin: 0 0 0.65rem;
+  font-family: var(--signa-font-display);
   font-size: 0.875rem;
   font-weight: 600;
-  color: var(--dash-accent, #5eead4);
+  color: var(--signa-primary);
   padding-bottom: 0.4rem;
-  border-bottom: 1px solid rgb(94 234 212 / 0.2);
+  border-bottom: 1px solid var(--dash-border);
 }
 
 .fieldGrid {
@@ -39,25 +40,48 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: #94a3b8;
+  color: var(--dash-muted);
 }
 
 .input {
   width: 100%;
   padding: 0.55rem 0.75rem;
   border-radius: 0.65rem;
-  border: 1px solid rgb(94 234 212 / 0.15);
-  background: rgb(5 10 18 / 0.6);
-  color: #f1f5f9;
+  border: 1px solid var(--signa-border);
+  background: var(--signa-card);
+  color: var(--dash-text);
   font-size: 0.8125rem;
   font-family: inherit;
   resize: vertical;
 }
 
 .input::placeholder {
-  color: #64748b;
+  color: var(--dash-muted);
 }
 
 .input:read-only {
   cursor: default;
+  background: var(--signa-secondary);
+}
+
+@media (max-width: 479px) {
+  .fieldGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .form {
+    gap: 1rem;
+  }
+
+  .input {
+    font-size: 0.875rem;
+    padding: 0.65rem 0.8rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .fieldGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.85rem 1rem;
+  }
 }

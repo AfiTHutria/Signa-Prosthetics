@@ -47,5 +47,21 @@
   .wrap.column .btnUser,
   .wrap.column .btnPro {
     width: 100%;
+    justify-content: center;
+    min-height: 2.75rem;
+  }
+}
+
+@media (max-width: 374px) {
+  .btnUser,
+  .btnPro {
+    padding: 0.75rem 0.9rem;
+    font-size: 0.8125rem;
+  }
+}
+
+@media (min-width: 900px) {
+  .wrap {
+    gap: 0.75rem;
   }
 }

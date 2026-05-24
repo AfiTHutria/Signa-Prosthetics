@@ -1,0 +1,29 @@
+/* Paleta compartida Signa (landing + app) */
+:root {
+  --signa-font-sans: 'Figtree', system-ui, sans-serif;
+  --signa-font-display: 'Outfit', system-ui, sans-serif;
+
+  --signa-background: oklch(0.995 0.005 150);
+  --signa-foreground: oklch(0.22 0.04 165);
+  --signa-card: oklch(1 0 0);
+  --signa-primary: oklch(0.62 0.16 152);
+  --signa-primary-foreground: oklch(0.99 0.01 150);
+  --signa-primary-soft: oklch(0.92 0.06 152);
+  --signa-secondary: oklch(0.96 0.03 150);
+  --signa-muted-foreground: oklch(0.48 0.03 160);
+  --signa-accent: #ffae3b;
+  --signa-accent-soft: #ffe3ba;
+  --signa-accent-foreground: oklch(0.22 0.05 60);
+  --signa-border: oklch(0.92 0.02 150);
+  --signa-ring: oklch(0.62 0.16 152 / 0.35);
+  --signa-gradient-shell: linear-gradient(
+    140deg,
+    oklch(0.96 0.05 150) 0%,
+    oklch(0.99 0.01 150) 55%,
+    #ffe3ba 100%
+  );
+  --signa-shadow-soft: 0 10px 30px -12px oklch(0.62 0.16 152 / 0.14);
+  --signa-shadow-card: 0 4px 20px -4px oklch(0.25 0.04 152 / 0.08);
+  --signa-danger: oklch(0.55 0.2 25);
+  --signa-danger-soft: oklch(0.95 0.04 25);
+}

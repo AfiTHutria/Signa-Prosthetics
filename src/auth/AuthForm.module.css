@@ -9,22 +9,29 @@
   padding: 0;
   border: none;
   background: none;
-  color: var(--dash-accent, #5eead4);
+  color: var(--signa-primary);
   font-size: 0.8125rem;
+  font-weight: 600;
   cursor: pointer;
+}
+
+.back:hover {
+  text-decoration: underline;
 }
 
 .formTitle {
   margin: 0;
+  font-family: var(--signa-font-display);
   font-size: 1.35rem;
   font-weight: 600;
-  color: #f0f9ff;
+  color: var(--dash-text);
 }
 
 .formDesc {
   margin: -0.25rem 0 0;
   font-size: 0.875rem;
-  color: #94a3b8;
+  color: var(--dash-muted);
+  line-height: 1.5;
 }
 
 .label {
@@ -32,33 +39,34 @@
   flex-direction: column;
   gap: 0.35rem;
   font-size: 0.75rem;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: #94a3b8;
+  color: var(--dash-muted);
 }
 
 .input {
   padding: 0.75rem 1rem;
   border-radius: 0.75rem;
-  border: 1px solid rgb(94 245 216 / 0.2);
-  background: rgb(5 10 18 / 0.8);
-  color: #f8fafc;
+  border: 1px solid var(--signa-border);
+  background: var(--signa-card);
+  color: var(--dash-text);
   font-size: 0.9375rem;
   outline: none;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .input:focus {
-  border-color: #5eead4;
-  box-shadow: 0 0 0 3px rgb(94 234 212 / 0.15);
+  border-color: var(--signa-primary);
+  box-shadow: 0 0 0 3px var(--signa-ring);
 }
 
 .error {
   margin: 0;
   padding: 0.65rem 0.85rem;
   border-radius: 0.65rem;
-  background: rgb(248 113 113 / 0.12);
-  color: #fca5a5;
+  background: var(--signa-danger-soft);
+  color: var(--signa-danger);
   font-size: 0.8125rem;
 }
 
@@ -67,21 +75,22 @@
   margin-top: 0.25rem;
   padding: 0.85rem 1rem;
   border: none;
-  border-radius: 0.85rem;
+  border-radius: 999px;
   font-size: 0.9375rem;
   font-weight: 600;
   cursor: pointer;
-  transition: transform 0.2s, opacity 0.2s;
+  transition: transform 0.2s, opacity 0.2s, box-shadow 0.2s;
+  box-shadow: var(--signa-shadow-soft);
 }
 
 .submit {
-  background: linear-gradient(135deg, #5eead4, #38bdf8);
-  color: #041018;
+  background: var(--signa-primary);
+  color: var(--signa-primary-foreground);
 }
 
 .submitPro {
-  background: linear-gradient(135deg, #38bdf8, #818cf8);
-  color: #041018;
+  background: linear-gradient(135deg, var(--signa-primary), oklch(0.58 0.12 165));
+  color: var(--signa-primary-foreground);
 }
 
 .submit:hover:not(:disabled),
@@ -98,6 +107,30 @@
 .hint {
   margin: 0;
   font-size: 0.75rem;
-  color: #64748b;
+  color: var(--dash-muted);
   text-align: center;
+  line-height: 1.45;
+}
+
+@media (max-width: 374px) {
+  .formTitle {
+    font-size: 1.2rem;
+  }
+
+  .input,
+  .submit,
+  .submitPro {
+    padding: 0.7rem 0.9rem;
+    font-size: 0.875rem;
+  }
+}
+
+@media (min-width: 480px) {
+  .form {
+    gap: 1.15rem;
+  }
+
+  .formTitle {
+    font-size: 1.4rem;
+  }
 }
