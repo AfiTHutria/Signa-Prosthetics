@@ -4,7 +4,6 @@ import styles from './AiCompanionPanel.module.css'
 
 export function AiCompanionPanel() {
   const {
-    sessionId,
     status,
     error,
     isActive,
@@ -29,11 +28,6 @@ export function AiCompanionPanel() {
       </header>
 
       <div className={styles.card}>
-        <div className={styles.meta}>
-          <span className={styles.label}>Sesión</span>
-          <code className={styles.sessionId}>{sessionId}</code>
-        </div>
-
         <p className={styles.status}>{status}</p>
 
         {error && <p className={styles.error}>{error}</p>}
