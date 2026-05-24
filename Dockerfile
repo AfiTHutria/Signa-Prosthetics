@@ -1,0 +1,15 @@
+# Build stage
+FROM node:20-alpine AS build
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm ci
+COPY . .
+RUN npm run build
+
+# Serve stage
+FROM node:20-alpine
+WORKDIR /app
+COPY --from=build /app/dist ./dist
+RUN npm install -g serve
+EXPOSE 8080
+CMD ["serve", "dist", "-l", "8080", "--gzip", "--no-etag"]
